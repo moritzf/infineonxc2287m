@@ -1,0 +1,13 @@
+*.o
+*.ko
+*.obj
+*.elf
+*.lib
+*.a
+*.dat
+*.log
+**/Debug/!*.hex!
+/Wuerfel_Moritz
+/Manual
+.metadata
+
