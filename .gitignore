@@ -12,3 +12,7 @@
 /Manual
 .metadata
 .settings
+*.cproject
+*.project
+*.launch
+*.lsl
