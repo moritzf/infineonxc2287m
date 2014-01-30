@@ -225,6 +225,8 @@ void MAIN_vChangeFreq(void)
   }
 
 } //  End of function MAIN_vChangeFreq
+
+
 //-----------------------------------------------------------------------------------
 void port_init (void)
 {
@@ -265,77 +267,34 @@ void lightDigit2 (unsigned char number) {
 	P3_OUT = 0x000B;
 	P10_OUT = number;
 }
-// Würfelzustände 1-6
-
-
-//void Wuerfel_1 (void)
-//{
-//	P10_OUT	= 0x003F;
-//}
-//void Wuerfel_2 (void)
-//{
-//	P10_OUT	= 0x005E;
-//
-//}
-//
-//void Wuerfel_3 (void)
-//{
-//	P10_OUT = 0x001E;
-//
-//}
-//
-//void Wuerfel_4 (void)
-//{
-//	P10_OUT = 0x004C;
-//
-//}
-//
-//void Wuerfel_5 (void)
-//{
-//	P10_OUT = 0x000C;
-//
-//}
-//
-//void Wuerfel_6 (void)
-//{
-//	P10_OUT = 0x0040;
-//
-//}
-void Segment_0 ()
-{
-	P10_OUT	= 0x003F;
-}
-void Segment_1 ()
-{
-	P10_OUT	= 0x005E;
-
-}
-
-void Segment_2 ()
-{
-	P10_OUT = 0x001E;
-
-}
-
-void Segment_3 ()
-{
-	P10_OUT = 0x004C;
-
-}
-
-void Segment_4 ()
-{
-	P10_OUT = 0x000C;
-
-}
-
-void Segment_5 ()
-{
-	P10_OUT = 0x0040;
-
-}
-
-unsigned char Segments0To9[10]= {0x003F, 0x005E, 0x001E, 0x004C, 0x000C, 0x0040, 0x0040, 0x0040, 0x0040, 0x0040};
+// 0100 0000 = G
+// 0010 0000 = A
+// 0001 0000 = F
+// 0000 1000 = B
+// 0000 0100 = C
+// 0000 0010 = E
+// 0000 0001 = D
+//		x-----------------xx
+//		|xxx     A       xx|
+//		|  xxx         xx  |
+//		|    x--------xx   |
+//		|    |        |    |
+//		| F  |        | B  |
+//		|    +        +    |
+//		+    |--------|    +
+//		+----+   G    +----+
+//		+    |--------|    +
+//		|    +        +    |
+//		|    |        |    |
+//		| E  |        | C  |
+//		|    |        |    |
+//		|    |        |    |
+//		|    |        |    |
+//		|   xx--------xxx  |
+//		|xxxx     D      xx|
+//		+-----------------xx
+unsigned char Numbers0To9[10] = {0x003F, 0x000C, 0x006B, 0x006D, 0x005C, 0x0075, 0x0077, 0x002C, 0x007F, 0x007D};
+unsigned char Segments0To6[7] = {0x0040, 0x0020, 0x0010, 0x0008, 0x0004, 0x0002, 0x0001};
 //----------------------------------------------------------------------------
 //Zufallssteuerung
 //void timer_init (void)
@@ -380,7 +339,8 @@ void timer2_init (void)
 	     ///  - timer 3 output toggle latch (T3OTL) is set to 0
 	     ///  - timer 3 run bit is reset
 	     //   - Timer 6 Reload Mode is enabled
-	GPT12E_T6CON = 0x9047; // Core Timer Start
+		//Period = 6.55 ms
+	GPT12E_T6CON = 0x9047; // Core Timer Start 1000 0000 0000 0000
 
 }
 //void Lauflicht (void)
@@ -463,18 +423,25 @@ void main(void)
   // USER CODE BEGIN (Main,3)
   port_init();
   timer2_init();
+
   while(1) {
-  for(int i = 0; i < 10; i++) {
+	  for (int i = 0; i < 10; i++) {
 	  for(int j = 0; j < 10; j++) {
+		  while(GPT12E_T6CON_T6OTL == 0) {
+			  lightDigit1(Numbers0To9[i]);
+		  }
 		  while(GPT12E_T6CON_T6OTL == 1) {
-		  lightDigit2(Segments0To9[j]);
+		  lightDigit2(Numbers0To9[j]);
 		  }
 	  }
-  while(GPT12E_T6CON_T6OTL == 1) {
-	  lightDigit1(Segments0To9[i]);
-  }
-
-  }
+	  }
+	  //Debug
+	  //Digit 0
+//	  for(int i = 0; i < 7; i++) {
+//        while(GPT12E_T6CON_T6OTL == 1) {
+//        	P10_OUT = 0x0004;
+//        }
+//	  }
   }
 
 
