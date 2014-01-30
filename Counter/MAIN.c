@@ -227,11 +227,11 @@ void MAIN_vChangeFreq(void)
 } //  End of function MAIN_vChangeFreq
 
 
-//-----------------------------------------------------------------------------------
-void port_init (void)
+void port_init ()
 {
 	// Display
-	// Output
+
+	//Output
 	P10_IOCR00	= 0x0080;
 	P10_IOCR01 	= 0x0080;
 	P10_IOCR02	= 0x0080;
@@ -240,15 +240,19 @@ void port_init (void)
 	P10_IOCR05	= 0x0080;
 	P10_IOCR06	= 0x0080;
 	P10_OUT     = 0x007F; // P10_IOCR00 - P10_IOCR06 HIGH
+
 	// Anodes
 	P3_IOCR03 = 0x0080; // digit 2
 	P3_IOCR04 = 0x0080; // digit 1
 
-	// Switch
+	// Switch (Not implemented yet)
+
 	// Cathode
 	P3_IOCR01 = 0x0080;
+
 	// Anode
 	P3_IOCR00 = 0x0080;
+
 	// Input
 	P3_IOCR02 = 0x0010;
 
@@ -267,6 +271,7 @@ void lightDigit2 (unsigned char number) {
 	P3_OUT = 0x000B;
 	P10_OUT = number;
 }
+
 // 0100 0000 = G
 // 0010 0000 = A
 // 0001 0000 = F
@@ -295,36 +300,9 @@ void lightDigit2 (unsigned char number) {
 //		+-----------------xx
 unsigned char Numbers0To9[10] = {0x003F, 0x000C, 0x006B, 0x006D, 0x005C, 0x0075, 0x0077, 0x002C, 0x007F, 0x007D};
 unsigned char Segments0To6[7] = {0x0040, 0x0020, 0x0010, 0x0008, 0x0004, 0x0002, 0x0001};
-//----------------------------------------------------------------------------
-//Zufallssteuerung
-//void timer_init (void)
-//{
-//	GPT12E_T3 = 0xFFFA; // Anfangswert Core Timer
-//	GPT12E_T2 = 0xFFFA; // Anfangswert Auxiliary Timer
-//    ///  -----------------------------------------------------------------------
-//    ///  Configuration of the GPT1 Auxiliary Timer 2:
-//    ///  -----------------------------------------------------------------------
-//    ///  - timer 2 works in timer mode
-//    ///  - external up/down control is disabled
-//    ///  - prescaler factor is 8
-//    ///  - up/down control bit is reset
-//    ///  - timer 2 run bit is reset
-//	GPT12E_T2CON = 0x0027;	// Reload Mode
-//     ///  -----------------------------------------------------------------------
-//     ///  Configuration of the GPT1 Core Timer 3:
-//     ///  -----------------------------------------------------------------------
-//     ///  - timer 3 works in timer mode
-//     ///  - external up/down control is disabled
-//     ///  - prescaler factor is 4
-//     ///  - up/down control bit is reset
-//     ///  - alternate output function T3OUT (P6.1) is disabled
-//     ///  - timer 3 output toggle latch (T3OTL) is set to 0
-//     ///  - timer 3 run bit is reset
-//	GPT12E_T3CON = 0x0840; // Start Timer
-//
-//}
 
-void timer2_init (void)
+
+void timer_init ()
 {
 	GPT12E_T6 = 0xFFFA; //Anfangswert Core Timer
 	GPT12E_CAPREL = 0xFF00; //Anfangswert Auxiliary Timer
@@ -336,155 +314,34 @@ void timer2_init (void)
 	     ///  - prescaler factor is 16
 	     ///  - up/down control bit is reset
 	     ///  - alternate output function T3OUT (P6.1) is disabled
-	     ///  - timer 3 output toggle latch (T3OTL) is set to 0
-	     ///  - timer 3 run bit is reset
-	     //   - Timer 6 Reload Mode is enabled
-		//Period = 6.55 ms
-	GPT12E_T6CON = 0x9047; // Core Timer Start 1000 0000 0000 0000
+	     ///  - timer 6 output toggle latch (T3OTL) is set to 0
+	     ///  - timer 6 run bit is reset
+	     //   - timer 6 Reload Mode is enabled
+
+	GPT12E_T6CON = 0x9047; // Factor is 2048
 
 }
-//void Lauflicht (void)
-//{
-//
-//	while(GPT12E_T6CON_T6OTL == 0){}
-//	while(GPT12E_T6CON_T6OTL == 1)
-//	{
-//		P10_OUT = 0xFFEF; // LED 4
-//	}
-//	while(GPT12E_T6CON_T6OTL == 0){}
-//	while(GPT12E_T6CON_T6OTL == 1)
-//	{
-//		P10_OUT = 0xFFFB; // LED 2
-//	}
-//	while(GPT12E_T6CON_T6OTL == 0){}
-//	while (GPT12E_T6CON_T6OTL == 1)
-//    {
-//    	P10_OUT = 0xFFFE; // LED 0
-//    }
-//	while(GPT12E_T6CON_T6OTL == 0){}
-//	while (GPT12E_T6CON_T6OTL == 1)
-//       {
-//       	P10_OUT = 0xFFFD; // LED 1
-//       }
-//	while(GPT12E_T6CON_T6OTL == 0){}
-//	while (GPT12E_T6CON_T6OTL == 1)
-//       {
-//       	P10_OUT = 0xFFF7; // LED 3
-//       }
-//	while(GPT12E_T6CON_T6OTL == 0){}
-//	while (GPT12E_T6CON_T6OTL == 1)
-//       {
-//       	P10_OUT = 0xFFDF; // LED 5
-//
-//	}
-//
-//
-//
-//
-//
-//
-//}
-//---------------------------------------------------------------------------
 
+void counter0To99() {
+	while(1) {
+		  for (int i = 0; i < 10; i++) {
+			  for(int j = 0; j < 10; j++) {
+				  while(GPT12E_T6CON_T6OTL == 0) {
+					  lightDigit1(Numbers0To9[i]);
+				  }
+				  while(GPT12E_T6CON_T6OTL == 1) {
+					  lightDigit2(Numbers0To9[j]);
+				  }
+			  }
+		  }
+	}
+}
 
-//----------------------------------------------------------------------------
-
-//****************************************************************************
-// @Function      void main(void) 
-//
-//----------------------------------------------------------------------------
-// @Description   This is the main function.
-//
-//----------------------------------------------------------------------------
-// @Returnvalue   None
-//
-//----------------------------------------------------------------------------
-// @Parameters    None
-//
-//----------------------------------------------------------------------------
-// @Date          20/1/2011
-//
-//****************************************************************************
-
-// USER CODE BEGIN (Main,1)
-
-// USER CODE END
-
-void main(void)
-{
-//unsigned int timer=0;
-
- // USER CODE BEGIN (Main,2)
-
-  // USER CODE END
-
+void main(void) {
   MAIN_vInit();
-
-  // USER CODE BEGIN (Main,3)
   port_init();
-  timer2_init();
-
-  while(1) {
-	  for (int i = 0; i < 10; i++) {
-	  for(int j = 0; j < 10; j++) {
-		  while(GPT12E_T6CON_T6OTL == 0) {
-			  lightDigit1(Numbers0To9[i]);
-		  }
-		  while(GPT12E_T6CON_T6OTL == 1) {
-		  lightDigit2(Numbers0To9[j]);
-		  }
-	  }
-	  }
-	  //Debug
-	  //Digit 0
-//	  for(int i = 0; i < 7; i++) {
-//        while(GPT12E_T6CON_T6OTL == 1) {
-//        	P10_OUT = 0x0004;
-//        }
-//	  }
-  }
-
-
-//  timer2_init();
-//  // USER CODE END
-
-//	do{
-//		if (P3_IN == 0)
-//		{
-//			while (P3_IN == 0)
-//				{
-//			      Lauflicht ();
-//				}
-//			timer = GPT12E_T3;
-//			switch (timer){
-//			case 0xFFFA: Wuerfel_1();
-//					break;
-//			case 0xFFFB: Wuerfel_2();
-//					break;
-//			case 0xFFFC: Wuerfel_3();
-//					break;
-//			case 0xFFFD: Wuerfel_4();
-//					break;
-//			case 0xFFFE: Wuerfel_5();
-//					break;
-//			case 0xFFFF: Wuerfel_6();
-//					break;
-//			default: Wuerfel_1();
-//			}
-//		}
-//		}while (1);
-   // USER CODE BEGIN (Main,4)
-
-   // USER CODE END
-
-} //  End of function main
-
-
-
-// USER CODE BEGIN (MAIN_General,10)
-
-
-
-// USER CODE END
+  timer_init();
+  counter0To99();
+}
 
 
