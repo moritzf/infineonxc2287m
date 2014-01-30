@@ -6,8 +6,8 @@
 *.a
 *.dat
 *.log
-**/Debug/!*.hex!
+**/Debug/!*.hex
 /Wuerfel_Moritz
 /Manual
 .metadata
-
+.settings
