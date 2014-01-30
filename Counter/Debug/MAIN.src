@@ -1,0 +1,2711 @@
+	; TASKING VX-toolset Lite for C166: C compiler v3.1r1 Build 718 SN 00000166
+	; Options: -f cc4204a --dep-file=.MAIN.obj.d -c99 -Mn --no-tasking-sfr -Cxc2287m --core=xc16x -IC:\Users\Moritz\builds\infineonxc2287\Counter -g --make-target=MAIN.obj --language=+cmp14,+div32,-gcc,-volatile,+strings --source -o MAIN.src
+	; Module start
+	.source	'..\\MAIN.c'
+code_MAIN_vInit	.section	code, cluster 'MAIN_vInit', new
+	.global	_MAIN_vInit
+
+; ..\MAIN.c	     1  //****************************************************************************
+; ..\MAIN.c	     2  // @Module        Project Settings
+; ..\MAIN.c	     3  // @Filename      MAIN.c
+; ..\MAIN.c	     4  // @Project       Würfel.dav
+; ..\MAIN.c	     5  //----------------------------------------------------------------------------
+; ..\MAIN.c	     6  // @Controller    Infineon XC2287M-104F
+; ..\MAIN.c	     7  //
+; ..\MAIN.c	     8  // @Compiler      TASKING VX-toolset
+; ..\MAIN.c	     9  //
+; ..\MAIN.c	    10  // @Codegenerator 1.0
+; ..\MAIN.c	    11  //
+; ..\MAIN.c	    12  
+; ..\MAIN.c	    13  
+; ..\MAIN.c	    14  #include "MAIN.h"
+; ..\MAIN.c	    15  
+; ..\MAIN.c	    16  
+; ..\MAIN.c	    17  
+; ..\MAIN.c	    18  
+; ..\MAIN.c	    19  void MAIN_vInit(void)
+; Function _MAIN_vInit
+_16:
+_MAIN_vInit	.proc	far
+
+; ..\MAIN.c	    20  {
+; ..\MAIN.c	    21    // USER CODE BEGIN (Init,2)
+; ..\MAIN.c	    22    //volatile unsigned int uwTemp;
+; ..\MAIN.c	    23  
+; ..\MAIN.c	    24    // USER CODE END
+; ..\MAIN.c	    25  
+; ..\MAIN.c	    26    //   globally disable interrupts
+; ..\MAIN.c	    27    PSW_IEN        =  0;          
+	bclr	0xff10.11
+_337:
+
+; ..\MAIN.c	    28  
+; ..\MAIN.c	    29  
+; ..\MAIN.c	    30    ///  -----------------------------------------------------------------------
+; ..\MAIN.c	    31    ///  Configuration of the System Clock:
+; ..\MAIN.c	    32    ///  -----------------------------------------------------------------------
+; ..\MAIN.c	    33    ///  - VCO clock used, input clock is connected
+; ..\MAIN.c	    34    ///  - input frequency is 5.00 MHz
+; ..\MAIN.c	    35    ///  - configured system frequency is 40.00 MHz
+; ..\MAIN.c	    36  
+; ..\MAIN.c	    37    MAIN_vUnlockProtecReg();     // unlock write security
+	call	_MAIN_vUnlockProtecReg
+_338:
+
+; ..\MAIN.c	    38  
+; ..\MAIN.c	    39    MAIN_vChangeFreq();          // load PLL control register
+	call	_MAIN_vChangeFreq
+_339:
+
+; ..\MAIN.c	    40  
+; ..\MAIN.c	    41  
+; ..\MAIN.c	    42    //   -----------------------------------------------------------------------
+; ..\MAIN.c	    43    //   Initialization of the Peripherals:
+; ..\MAIN.c	    44    //   -----------------------------------------------------------------------
+; ..\MAIN.c	    45  
+; ..\MAIN.c	    46    //   initializes the Parallel Ports
+; ..\MAIN.c	    47  
+; ..\MAIN.c	    48    //   initializes the General Purpose Timer Unit (GPT1)
+; ..\MAIN.c	    49      GPT12E_KSCCFG  =  0x0003;      // Module Enable
+	movw	0xfe1c,#0x3
+_340:
+
+; ..\MAIN.c	    50      _nop();
+	nop
+_341:
+
+; ..\MAIN.c	    51      _nop();
+	nop
+_342:
+
+; ..\MAIN.c	    52  
+; ..\MAIN.c	    53    //   -----------------------------------------------------------------------
+; ..\MAIN.c	    54    //   SCU Interrupt Disable configuration:
+; ..\MAIN.c	    55    //   -----------------------------------------------------------------------
+; ..\MAIN.c	    56    SCU_INTDIS     =  0xFFFF;      // SCU Interrupt Disable Register
+	movw	0xfe84,ONES
+_343:
+
+; ..\MAIN.c	    57     //uwTemp         =  GPT12E_KSCCFG;  // dummy read to avoid pipeline effects
+; ..\MAIN.c	    58  
+; ..\MAIN.c	    59    //   -----------------------------------------------------------------------
+; ..\MAIN.c	    60    //   Initialization of the Bank Select registers:
+; ..\MAIN.c	    61    //   -----------------------------------------------------------------------
+; ..\MAIN.c	    62  
+; ..\MAIN.c	    63  
+; ..\MAIN.c	    64    //   -----------------------------------------------------------------------
+; ..\MAIN.c	    65    //   SCU Interrupt Source Selection configuration:
+; ..\MAIN.c	    66    //   -----------------------------------------------------------------------
+; ..\MAIN.c	    67    SCU_ISSR       =  0x0000;      // SCU Interrupt Source Select Register
+	movw	0xff2e,ZEROS
+_344:
+
+; ..\MAIN.c	    68  
+; ..\MAIN.c	    69    // USER CODE BEGIN (Init,3)
+; ..\MAIN.c	    70  
+; ..\MAIN.c	    71    // USER CODE END
+; ..\MAIN.c	    72  
+; ..\MAIN.c	    73    MAIN_vLockProtecReg();       // lock write security
+	call	_MAIN_vLockProtecReg
+_345:
+
+; ..\MAIN.c	    74  
+; ..\MAIN.c	    75    //   globally enable interrupts
+; ..\MAIN.c	    76    PSW_IEN        =  1;          
+	bset	0xff10.11
+_346:
+
+; ..\MAIN.c	    77  
+; ..\MAIN.c	    78  } //  End of function MAIN_vInit
+	ret
+_218:
+	; End of function
+	; End of section
+
+code_MAIN_vUnlockProtecReg	.section	code, cluster 'MAIN_vUnlockProtecReg', new
+	.global	_MAIN_vUnlockProtecReg
+
+; ..\MAIN.c	    79  
+; ..\MAIN.c	    80  
+; ..\MAIN.c	    81  //****************************************************************************
+; ..\MAIN.c	    82  // @Function      void MAIN_vUnlockProtecReg(void) 
+; ..\MAIN.c	    83  //
+; ..\MAIN.c	    84  //----------------------------------------------------------------------------
+; ..\MAIN.c	    85  // @Description   This function makes it possible to write one protected 
+; ..\MAIN.c	    86  //                register.
+; ..\MAIN.c	    87  //
+; ..\MAIN.c	    88  //----------------------------------------------------------------------------
+; ..\MAIN.c	    89  // @Returnvalue   None
+; ..\MAIN.c	    90  //
+; ..\MAIN.c	    91  //----------------------------------------------------------------------------
+; ..\MAIN.c	    92  // @Parameters    None
+; ..\MAIN.c	    93  //
+; ..\MAIN.c	    94  //----------------------------------------------------------------------------
+; ..\MAIN.c	    95  // @Date          20/1/2011
+; ..\MAIN.c	    96  //
+; ..\MAIN.c	    97  //****************************************************************************
+; ..\MAIN.c	    98  
+; ..\MAIN.c	    99  // USER CODE BEGIN (UnlockProtecReg,1)
+; ..\MAIN.c	   100  
+; ..\MAIN.c	   101  // USER CODE END
+; ..\MAIN.c	   102  
+; ..\MAIN.c	   103  void MAIN_vUnlockProtecReg(void)
+; Function _MAIN_vUnlockProtecReg
+_28:
+_MAIN_vUnlockProtecReg	.proc	far
+
+; ..\MAIN.c	   104  {
+; ..\MAIN.c	   105    uword uwPASSWORD;
+; ..\MAIN.c	   106  
+; ..\MAIN.c	   107      SCU_SLC = 0xAAAA;                   // command 0
+	extr	#0x1
+	movw	0xf0c0,#0xaaaa
+_301:
+
+; ..\MAIN.c	   108      SCU_SLC = 0x5554;                   // command 1
+	extr	#0x1
+	movw	0xf0c0,#0x5554
+_302:
+
+; ..\MAIN.c	   109  
+; ..\MAIN.c	   110      uwPASSWORD = SCU_SLS & 0x00FF;
+	movw	r11,0xf0c2
+_287:
+	andw	r11,#0xff
+_303:
+
+; ..\MAIN.c	   111      uwPASSWORD = (~uwPASSWORD) & 0x00FF;
+	cplw	r11
+_304:
+	andw	r11,#0xff
+_305:
+
+; ..\MAIN.c	   112  
+; ..\MAIN.c	   113      SCU_SLC = 0x9600 | uwPASSWORD;      // command 2
+	orw	r11,#0x9600
+_306:
+	movw	0xf0c0,r11
+_307:
+
+; ..\MAIN.c	   114      SCU_SLC = 0x0000;                   // command 3
+	movw	0xf0c0,ZEROS
+_308:
+
+; ..\MAIN.c	   115  
+; ..\MAIN.c	   116  } //  End of function MAIN_vUnlockProtecReg
+	ret
+_203:
+	; End of function
+	; End of section
+
+code_MAIN_vLockProtecReg	.section	code, cluster 'MAIN_vLockProtecReg', new
+	.global	_MAIN_vLockProtecReg
+
+; ..\MAIN.c	   117  
+; ..\MAIN.c	   118  
+; ..\MAIN.c	   119  //****************************************************************************
+; ..\MAIN.c	   120  // @Function      void MAIN_vLockProtecReg(void) 
+; ..\MAIN.c	   121  //
+; ..\MAIN.c	   122  //----------------------------------------------------------------------------
+; ..\MAIN.c	   123  // @Description   This function makes it possible to lock one protected 
+; ..\MAIN.c	   124  //                register.
+; ..\MAIN.c	   125  //
+; ..\MAIN.c	   126  //----------------------------------------------------------------------------
+; ..\MAIN.c	   127  // @Returnvalue   None
+; ..\MAIN.c	   128  //
+; ..\MAIN.c	   129  //----------------------------------------------------------------------------
+; ..\MAIN.c	   130  // @Parameters    None
+; ..\MAIN.c	   131  //
+; ..\MAIN.c	   132  //----------------------------------------------------------------------------
+; ..\MAIN.c	   133  // @Date          20/1/2011
+; ..\MAIN.c	   134  //
+; ..\MAIN.c	   135  //****************************************************************************
+; ..\MAIN.c	   136  
+; ..\MAIN.c	   137  // USER CODE BEGIN (LockProtecReg,1)
+; ..\MAIN.c	   138  
+; ..\MAIN.c	   139  // USER CODE END
+; ..\MAIN.c	   140  
+; ..\MAIN.c	   141  void MAIN_vLockProtecReg(void)
+; Function _MAIN_vLockProtecReg
+_40:
+_MAIN_vLockProtecReg	.proc	far
+
+; ..\MAIN.c	   142  {
+; ..\MAIN.c	   143    uword uwPASSWORD;
+; ..\MAIN.c	   144  
+; ..\MAIN.c	   145      SCU_SLC = 0xAAAA;                   // command 0
+	extr	#0x1
+	movw	0xf0c0,#0xaaaa
+_313:
+
+; ..\MAIN.c	   146      SCU_SLC = 0x5554;                   // command 1
+	extr	#0x1
+	movw	0xf0c0,#0x5554
+_314:
+
+; ..\MAIN.c	   147  
+; ..\MAIN.c	   148      uwPASSWORD = SCU_SLS & 0x00FF;
+	movw	r11,0xf0c2
+_288:
+	andw	r11,#0xff
+_315:
+
+; ..\MAIN.c	   149      uwPASSWORD = (~uwPASSWORD) & 0x00FF;
+	cplw	r11
+_316:
+	andw	r11,#0xff
+_317:
+
+; ..\MAIN.c	   150  
+; ..\MAIN.c	   151      SCU_SLC = 0x9600 | uwPASSWORD;      // command 2
+	orw	r11,#0x9600
+_318:
+	movw	0xf0c0,r11
+_319:
+
+; ..\MAIN.c	   152      SCU_SLC = 0x1800;                   // command 3; new PASSWOR is 0x00
+	extr	#0x1
+	movw	0xf0c0,#0x1800
+_320:
+
+; ..\MAIN.c	   153  
+; ..\MAIN.c	   154      uwPASSWORD = SCU_SLS & 0x00FF;
+	movw	r11,0xf0c2
+_321:
+	andw	r11,#0xff
+_322:
+
+; ..\MAIN.c	   155      uwPASSWORD = (~uwPASSWORD) & 0x00FF;
+	cplw	r11
+_323:
+	andw	r11,#0xff
+_324:
+
+; ..\MAIN.c	   156      SCU_SLC = 0x8E00 | uwPASSWORD;      // command 4
+	orw	r11,#0x8e00
+_325:
+	movw	0xf0c0,r11
+_326:
+
+; ..\MAIN.c	   157  
+; ..\MAIN.c	   158  } //  End of function MAIN_vLockProtecReg
+	ret
+_208:
+	; End of function
+	; End of section
+
+code_MAIN_vChangeFreq	.section	code, cluster 'MAIN_vChangeFreq', new
+	.global	_MAIN_vChangeFreq
+
+; ..\MAIN.c	   159  
+; ..\MAIN.c	   160  
+; ..\MAIN.c	   161  //****************************************************************************
+; ..\MAIN.c	   162  // @Function      void MAIN_vChangeFreq(void) 
+; ..\MAIN.c	   163  //
+; ..\MAIN.c	   164  //----------------------------------------------------------------------------
+; ..\MAIN.c	   165  // @Description   This function is used to select the external crystal and
+; ..\MAIN.c	   166  //                configure the system frequency to 100MHz/80MHz/66MHz.
+; ..\MAIN.c	   167  //
+; ..\MAIN.c	   168  //----------------------------------------------------------------------------
+; ..\MAIN.c	   169  // @Returnvalue   None
+; ..\MAIN.c	   170  //
+; ..\MAIN.c	   171  //----------------------------------------------------------------------------
+; ..\MAIN.c	   172  // @Parameters    None
+; ..\MAIN.c	   173  //
+; ..\MAIN.c	   174  //----------------------------------------------------------------------------
+; ..\MAIN.c	   175  // @Date          20/1/2011
+; ..\MAIN.c	   176  //
+; ..\MAIN.c	   177  //****************************************************************************
+; ..\MAIN.c	   178  
+; ..\MAIN.c	   179  // USER CODE BEGIN (ChangeFreq,1)
+; ..\MAIN.c	   180  
+; ..\MAIN.c	   181  // USER CODE END
+; ..\MAIN.c	   182  
+; ..\MAIN.c	   183  void MAIN_vChangeFreq(void)
+; Function _MAIN_vChangeFreq
+_52:
+_MAIN_vChangeFreq	.proc	far
+
+; ..\MAIN.c	   184  {
+; ..\MAIN.c	   185    //Scs_ErrorType Error;
+; ..\MAIN.c	   186  
+; ..\MAIN.c	   187    //For application and internal application resets, the complete PLL configuration could be avoided
+; ..\MAIN.c	   188    //The entry from application resets and internal application reset is covered in the following differentiation
+; ..\MAIN.c	   189    //in int/ext clock in lock/unlocked state.
+; ..\MAIN.c	   190  
+; ..\MAIN.c	   191    if  ((SCU_PLLSTAT & 0x0004) == 0x0004)       // fR derived from Internal clock
+	movw	r11,0xf0bc
+_331:
+	jnb	r11.2,_2
+_332:
+
+; ..\MAIN.c	   192    {
+; ..\MAIN.c	   193      //Normal startup state during boot and the clock
+; ..\MAIN.c	   194      //has to be in the next step configured on the external crystal
+; ..\MAIN.c	   195      //use XTAL/VCO, count XTAL clock
+; ..\MAIN.c	   196  
+; ..\MAIN.c	   197      //Scs_InitTimer();       // initialize CCU6 timer T13 for SCS driver
+; ..\MAIN.c	   198  
+; ..\MAIN.c	   199      // perform transition from base mode to normal mode, check for error
+; ..\MAIN.c	   200      //Error = Scs_GoFromBaseModeToNormalMode();
+; ..\MAIN.c	   201      /*if(Error)
+; ..\MAIN.c	   202      {
+; ..\MAIN.c	   203        for(;;)      // this part of code should not be reached
+; ..\MAIN.c	   204        {
+; ..\MAIN.c	   205          NOP();
+; ..\MAIN.c	   206        }
+; ..\MAIN.c	   207      }*/
+; ..\MAIN.c	   208  
+; ..\MAIN.c	   209      if ((SCU_PLLSTAT & 0x1009) == 0x1009)      // fR derived from external crystal clock + VCO is locked
+	movw	r11,0xf0bc
+_2:
+
+; ..\MAIN.c	   210      {
+; ..\MAIN.c	   211        //usually after an application reset where clock need not be configured again.
+; ..\MAIN.c	   212        //check K2/P/N values and decide whether these values have to be adapted based on application needs.
+; ..\MAIN.c	   213       //NOP();
+; ..\MAIN.c	   214        //usually the PLL losss of Lock TRAP schould be enabled here.
+; ..\MAIN.c	   215      }
+; ..\MAIN.c	   216      else       //fR derived from external crystal clock + VCO is not locked
+; ..\MAIN.c	   217      {
+; ..\MAIN.c	   218                 //estimate the K1 value and the current frequency
+; ..\MAIN.c	   219                 //reduce K2/P/N values in steps so that the frequency
+; ..\MAIN.c	   220                 //jumps is limited to 20MHz or factor of 5 whichever is minimum
+; ..\MAIN.c	   221        //NOP();
+; ..\MAIN.c	   222      }
+; ..\MAIN.c	   223  
+; ..\MAIN.c	   224  
+; ..\MAIN.c	   225    }
+; ..\MAIN.c	   226  
+; ..\MAIN.c	   227  } //  End of function MAIN_vChangeFreq
+	ret
+_213:
+	; End of function
+	; End of section
+
+code_port_init	.section	code, cluster 'port_init', new
+	.global	_port_init
+
+; ..\MAIN.c	   228  //-----------------------------------------------------------------------------------
+; ..\MAIN.c	   229  void port_init (void)
+; Function _port_init
+_64:
+_port_init	.proc	far
+
+; ..\MAIN.c	   230  {
+; ..\MAIN.c	   231  	// Display
+; ..\MAIN.c	   232  	// Output
+; ..\MAIN.c	   233  	P10_IOCR00	= 0x0080;
+	movw	r11,#0x80
+_351:
+	movw	0xe940,r11
+_352:
+
+; ..\MAIN.c	   234  	P10_IOCR01 	= 0x0080;
+	movw	0xe942,r11
+_353:
+
+; ..\MAIN.c	   235  	P10_IOCR02	= 0x0080;
+	movw	0xe944,r11
+_354:
+
+; ..\MAIN.c	   236  	P10_IOCR03	= 0x0080;
+	movw	0xe946,r11
+_355:
+
+; ..\MAIN.c	   237  	P10_IOCR04	= 0x0080;
+	movw	0xe948,r11
+_356:
+
+; ..\MAIN.c	   238  	P10_IOCR05	= 0x0080;
+	movw	0xe94a,r11
+_357:
+
+; ..\MAIN.c	   239  	P10_IOCR06	= 0x0080;
+	movw	0xe94c,r11
+_358:
+
+; ..\MAIN.c	   240  	P10_OUT     = 0x007F; // P10_IOCR00 - P10_IOCR06 HIGH
+	movw	0xffb6,#0x7f
+_359:
+
+; ..\MAIN.c	   241  	// Anodes
+; ..\MAIN.c	   242  	P3_IOCR03 = 0x0080; // digit 2
+	movw	0xe866,r11
+_360:
+
+; ..\MAIN.c	   243  	P3_IOCR04 = 0x0080; // digit 1
+	movw	0xe868,r11
+_361:
+
+; ..\MAIN.c	   244  
+; ..\MAIN.c	   245  	// Switch
+; ..\MAIN.c	   246  	// Cathode
+; ..\MAIN.c	   247  	P3_IOCR01 = 0x0080;
+	movw	0xe862,r11
+_362:
+
+; ..\MAIN.c	   248  	// Anode
+; ..\MAIN.c	   249  	P3_IOCR00 = 0x0080;
+	movw	0xe860,r11
+_363:
+
+; ..\MAIN.c	   250  	// Input
+; ..\MAIN.c	   251  	P3_IOCR02 = 0x0010;
+	movw	r11,#0x10
+_364:
+	movw	0xe864,r11
+_365:
+
+; ..\MAIN.c	   252  
+; ..\MAIN.c	   253  	//P3_OUT = 0x001B; //0000 0000 0001 1011
+; ..\MAIN.c	   254  	P3_OUT = 0x000B; // 0000 0000 0000 1011 digit 2
+	movw	0xffa8,#0xb
+_366:
+
+; ..\MAIN.c	   255  	//P3_OUT = 0x0013; digit 1
+; ..\MAIN.c	   256  	P3_IN = 0x0002;
+	movw	0xff86,#0x2
+_367:
+
+; ..\MAIN.c	   257  }
+	ret
+_223:
+	; End of function
+	; End of section
+
+code_lightDigit1	.section	code, cluster 'lightDigit1', new
+	.global	_lightDigit1
+
+; ..\MAIN.c	   258  
+; ..\MAIN.c	   259  void lightDigit1(unsigned char number) {
+; Function _lightDigit1
+_76:
+_lightDigit1	.proc	far
+
+; ..\MAIN.c	   260  	P3_OUT = 0x0013;
+	movw	0xffa8,#0x13
+_372:
+
+; ..\MAIN.c	   261  	P10_OUT = number;
+	movbz	r11,rl2
+_289:
+	movw	0xffb6,r11
+_373:
+
+; ..\MAIN.c	   262  }
+	ret
+_228:
+	; End of function
+	; End of section
+
+code_lightDigit2	.section	code, cluster 'lightDigit2', new
+	.global	_lightDigit2
+
+; ..\MAIN.c	   263  
+; ..\MAIN.c	   264  void lightDigit2 (unsigned char number) {
+; Function _lightDigit2
+_88:
+_lightDigit2	.proc	far
+
+; ..\MAIN.c	   265  	P3_OUT = 0x000B;
+	movw	0xffa8,#0xb
+_378:
+
+; ..\MAIN.c	   266  	P10_OUT = number;
+	movbz	r11,rl2
+_290:
+	movw	0xffb6,r11
+_379:
+
+; ..\MAIN.c	   267  }
+	ret
+_233:
+	; End of function
+	; End of section
+
+code_Segment_0	.section	code, cluster 'Segment_0', new
+	.global	_Segment_0
+
+; ..\MAIN.c	   268  // Würfelzustände 1-6
+; ..\MAIN.c	   269  
+; ..\MAIN.c	   270  
+; ..\MAIN.c	   271  //void Wuerfel_1 (void)
+; ..\MAIN.c	   272  //{
+; ..\MAIN.c	   273  //	P10_OUT	= 0x003F;
+; ..\MAIN.c	   274  //}
+; ..\MAIN.c	   275  //void Wuerfel_2 (void)
+; ..\MAIN.c	   276  //{
+; ..\MAIN.c	   277  //	P10_OUT	= 0x005E;
+; ..\MAIN.c	   278  //
+; ..\MAIN.c	   279  //}
+; ..\MAIN.c	   280  //
+; ..\MAIN.c	   281  //void Wuerfel_3 (void)
+; ..\MAIN.c	   282  //{
+; ..\MAIN.c	   283  //	P10_OUT = 0x001E;
+; ..\MAIN.c	   284  //
+; ..\MAIN.c	   285  //}
+; ..\MAIN.c	   286  //
+; ..\MAIN.c	   287  //void Wuerfel_4 (void)
+; ..\MAIN.c	   288  //{
+; ..\MAIN.c	   289  //	P10_OUT = 0x004C;
+; ..\MAIN.c	   290  //
+; ..\MAIN.c	   291  //}
+; ..\MAIN.c	   292  //
+; ..\MAIN.c	   293  //void Wuerfel_5 (void)
+; ..\MAIN.c	   294  //{
+; ..\MAIN.c	   295  //	P10_OUT = 0x000C;
+; ..\MAIN.c	   296  //
+; ..\MAIN.c	   297  //}
+; ..\MAIN.c	   298  //
+; ..\MAIN.c	   299  //void Wuerfel_6 (void)
+; ..\MAIN.c	   300  //{
+; ..\MAIN.c	   301  //	P10_OUT = 0x0040;
+; ..\MAIN.c	   302  //
+; ..\MAIN.c	   303  //}
+; ..\MAIN.c	   304  void Segment_0 ()
+; Function _Segment_0
+_100:
+_Segment_0	.proc	far
+
+; ..\MAIN.c	   305  {
+; ..\MAIN.c	   306  	P10_OUT	= 0x003F;
+	movw	0xffb6,#0x3f
+_384:
+
+; ..\MAIN.c	   307  }
+	ret
+_238:
+	; End of function
+	; End of section
+
+code_Segment_1	.section	code, cluster 'Segment_1', new
+	.global	_Segment_1
+
+; ..\MAIN.c	   308  void Segment_1 ()
+; Function _Segment_1
+_112:
+_Segment_1	.proc	far
+
+; ..\MAIN.c	   309  {
+; ..\MAIN.c	   310  	P10_OUT	= 0x005E;
+	movw	0xffb6,#0x5e
+_389:
+
+; ..\MAIN.c	   311  
+; ..\MAIN.c	   312  }
+	ret
+_243:
+	; End of function
+	; End of section
+
+code_Segment_2	.section	code, cluster 'Segment_2', new
+	.global	_Segment_2
+
+; ..\MAIN.c	   313  
+; ..\MAIN.c	   314  void Segment_2 ()
+; Function _Segment_2
+_124:
+_Segment_2	.proc	far
+
+; ..\MAIN.c	   315  {
+; ..\MAIN.c	   316  	P10_OUT = 0x001E;
+	movw	0xffb6,#0x1e
+_394:
+
+; ..\MAIN.c	   317  
+; ..\MAIN.c	   318  }
+	ret
+_248:
+	; End of function
+	; End of section
+
+code_Segment_3	.section	code, cluster 'Segment_3', new
+	.global	_Segment_3
+
+; ..\MAIN.c	   319  
+; ..\MAIN.c	   320  void Segment_3 ()
+; Function _Segment_3
+_136:
+_Segment_3	.proc	far
+
+; ..\MAIN.c	   321  {
+; ..\MAIN.c	   322  	P10_OUT = 0x004C;
+	movw	0xffb6,#0x4c
+_399:
+
+; ..\MAIN.c	   323  
+; ..\MAIN.c	   324  }
+	ret
+_253:
+	; End of function
+	; End of section
+
+code_Segment_4	.section	code, cluster 'Segment_4', new
+	.global	_Segment_4
+
+; ..\MAIN.c	   325  
+; ..\MAIN.c	   326  void Segment_4 ()
+; Function _Segment_4
+_148:
+_Segment_4	.proc	far
+
+; ..\MAIN.c	   327  {
+; ..\MAIN.c	   328  	P10_OUT = 0x000C;
+	movw	0xffb6,#0xc
+_404:
+
+; ..\MAIN.c	   329  
+; ..\MAIN.c	   330  }
+	ret
+_258:
+	; End of function
+	; End of section
+
+code_Segment_5	.section	code, cluster 'Segment_5', new
+	.global	_Segment_5
+
+; ..\MAIN.c	   331  
+; ..\MAIN.c	   332  void Segment_5 ()
+; Function _Segment_5
+_160:
+_Segment_5	.proc	far
+
+; ..\MAIN.c	   333  {
+; ..\MAIN.c	   334  	P10_OUT = 0x0040;
+	movw	0xffb6,#0x40
+_409:
+
+; ..\MAIN.c	   335  
+; ..\MAIN.c	   336  }
+	ret
+_263:
+	; End of function
+	; End of section
+
+code_timer2_init	.section	code, cluster 'timer2_init', new
+	.global	_timer2_init
+
+; ..\MAIN.c	   337  
+; ..\MAIN.c	   338  unsigned char Segments0To9[10]= {0x003F, 0x005E, 0x001E, 0x004C, 0x000C, 0x0040, 0x0040, 0x0040, 0x0040, 0x0040};
+; ..\MAIN.c	   339  //----------------------------------------------------------------------------
+; ..\MAIN.c	   340  //Zufallssteuerung
+; ..\MAIN.c	   341  //void timer_init (void)
+; ..\MAIN.c	   342  //{
+; ..\MAIN.c	   343  //	GPT12E_T3 = 0xFFFA; // Anfangswert Core Timer
+; ..\MAIN.c	   344  //	GPT12E_T2 = 0xFFFA; // Anfangswert Auxiliary Timer
+; ..\MAIN.c	   345  //    ///  -----------------------------------------------------------------------
+; ..\MAIN.c	   346  //    ///  Configuration of the GPT1 Auxiliary Timer 2:
+; ..\MAIN.c	   347  //    ///  -----------------------------------------------------------------------
+; ..\MAIN.c	   348  //    ///  - timer 2 works in timer mode
+; ..\MAIN.c	   349  //    ///  - external up/down control is disabled
+; ..\MAIN.c	   350  //    ///  - prescaler factor is 8
+; ..\MAIN.c	   351  //    ///  - up/down control bit is reset
+; ..\MAIN.c	   352  //    ///  - timer 2 run bit is reset
+; ..\MAIN.c	   353  //	GPT12E_T2CON = 0x0027;	// Reload Mode
+; ..\MAIN.c	   354  //     ///  -----------------------------------------------------------------------
+; ..\MAIN.c	   355  //     ///  Configuration of the GPT1 Core Timer 3:
+; ..\MAIN.c	   356  //     ///  -----------------------------------------------------------------------
+; ..\MAIN.c	   357  //     ///  - timer 3 works in timer mode
+; ..\MAIN.c	   358  //     ///  - external up/down control is disabled
+; ..\MAIN.c	   359  //     ///  - prescaler factor is 4
+; ..\MAIN.c	   360  //     ///  - up/down control bit is reset
+; ..\MAIN.c	   361  //     ///  - alternate output function T3OUT (P6.1) is disabled
+; ..\MAIN.c	   362  //     ///  - timer 3 output toggle latch (T3OTL) is set to 0
+; ..\MAIN.c	   363  //     ///  - timer 3 run bit is reset
+; ..\MAIN.c	   364  //	GPT12E_T3CON = 0x0840; // Start Timer
+; ..\MAIN.c	   365  //
+; ..\MAIN.c	   366  //}
+; ..\MAIN.c	   367  
+; ..\MAIN.c	   368  void timer2_init (void)
+; Function _timer2_init
+_172:
+_timer2_init	.proc	far
+
+; ..\MAIN.c	   369  {
+; ..\MAIN.c	   370  	GPT12E_T6 = 0xFFFA; //Anfangswert Core Timer
+	movw	0xfe48,#0xfffa
+_414:
+
+; ..\MAIN.c	   371  	GPT12E_CAPREL = 0xFF00; //Anfangswert Auxiliary Timer
+	movw	0xfe4a,#0xff00
+_415:
+
+; ..\MAIN.c	   372  	 ///  -----------------------------------------------------------------------
+; ..\MAIN.c	   373  	     ///  Configuration of the GPT2 Core Timer 6:
+; ..\MAIN.c	   374  	     ///  -----------------------------------------------------------------------
+; ..\MAIN.c	   375  	     ///  - timer 6 works in timer mode
+; ..\MAIN.c	   376  	     ///  - external up/down control is disabled
+; ..\MAIN.c	   377  	     ///  - prescaler factor is 16
+; ..\MAIN.c	   378  	     ///  - up/down control bit is reset
+; ..\MAIN.c	   379  	     ///  - alternate output function T3OUT (P6.1) is disabled
+; ..\MAIN.c	   380  	     ///  - timer 3 output toggle latch (T3OTL) is set to 0
+; ..\MAIN.c	   381  	     ///  - timer 3 run bit is reset
+; ..\MAIN.c	   382  	     //   - Timer 6 Reload Mode is enabled
+; ..\MAIN.c	   383  	GPT12E_T6CON = 0x9047; // Core Timer Start
+	movw	0xff48,#0x9047
+_416:
+
+; ..\MAIN.c	   384  
+; ..\MAIN.c	   385  }
+	ret
+_268:
+	; End of function
+	; End of section
+
+code_main	.section	code, cluster 'main', new
+	.global	_main
+
+; ..\MAIN.c	   386  //void Lauflicht (void)
+; ..\MAIN.c	   387  //{
+; ..\MAIN.c	   388  //
+; ..\MAIN.c	   389  //	while(GPT12E_T6CON_T6OTL == 0){}
+; ..\MAIN.c	   390  //	while(GPT12E_T6CON_T6OTL == 1)
+; ..\MAIN.c	   391  //	{
+; ..\MAIN.c	   392  //		P10_OUT = 0xFFEF; // LED 4
+; ..\MAIN.c	   393  //	}
+; ..\MAIN.c	   394  //	while(GPT12E_T6CON_T6OTL == 0){}
+; ..\MAIN.c	   395  //	while(GPT12E_T6CON_T6OTL == 1)
+; ..\MAIN.c	   396  //	{
+; ..\MAIN.c	   397  //		P10_OUT = 0xFFFB; // LED 2
+; ..\MAIN.c	   398  //	}
+; ..\MAIN.c	   399  //	while(GPT12E_T6CON_T6OTL == 0){}
+; ..\MAIN.c	   400  //	while (GPT12E_T6CON_T6OTL == 1)
+; ..\MAIN.c	   401  //    {
+; ..\MAIN.c	   402  //    	P10_OUT = 0xFFFE; // LED 0
+; ..\MAIN.c	   403  //    }
+; ..\MAIN.c	   404  //	while(GPT12E_T6CON_T6OTL == 0){}
+; ..\MAIN.c	   405  //	while (GPT12E_T6CON_T6OTL == 1)
+; ..\MAIN.c	   406  //       {
+; ..\MAIN.c	   407  //       	P10_OUT = 0xFFFD; // LED 1
+; ..\MAIN.c	   408  //       }
+; ..\MAIN.c	   409  //	while(GPT12E_T6CON_T6OTL == 0){}
+; ..\MAIN.c	   410  //	while (GPT12E_T6CON_T6OTL == 1)
+; ..\MAIN.c	   411  //       {
+; ..\MAIN.c	   412  //       	P10_OUT = 0xFFF7; // LED 3
+; ..\MAIN.c	   413  //       }
+; ..\MAIN.c	   414  //	while(GPT12E_T6CON_T6OTL == 0){}
+; ..\MAIN.c	   415  //	while (GPT12E_T6CON_T6OTL == 1)
+; ..\MAIN.c	   416  //       {
+; ..\MAIN.c	   417  //       	P10_OUT = 0xFFDF; // LED 5
+; ..\MAIN.c	   418  //
+; ..\MAIN.c	   419  //	}
+; ..\MAIN.c	   420  //
+; ..\MAIN.c	   421  //
+; ..\MAIN.c	   422  //
+; ..\MAIN.c	   423  //
+; ..\MAIN.c	   424  //
+; ..\MAIN.c	   425  //
+; ..\MAIN.c	   426  //}
+; ..\MAIN.c	   427  //---------------------------------------------------------------------------
+; ..\MAIN.c	   428  
+; ..\MAIN.c	   429  
+; ..\MAIN.c	   430  //----------------------------------------------------------------------------
+; ..\MAIN.c	   431  
+; ..\MAIN.c	   432  //****************************************************************************
+; ..\MAIN.c	   433  // @Function      void main(void) 
+; ..\MAIN.c	   434  //
+; ..\MAIN.c	   435  //----------------------------------------------------------------------------
+; ..\MAIN.c	   436  // @Description   This is the main function.
+; ..\MAIN.c	   437  //
+; ..\MAIN.c	   438  //----------------------------------------------------------------------------
+; ..\MAIN.c	   439  // @Returnvalue   None
+; ..\MAIN.c	   440  //
+; ..\MAIN.c	   441  //----------------------------------------------------------------------------
+; ..\MAIN.c	   442  // @Parameters    None
+; ..\MAIN.c	   443  //
+; ..\MAIN.c	   444  //----------------------------------------------------------------------------
+; ..\MAIN.c	   445  // @Date          20/1/2011
+; ..\MAIN.c	   446  //
+; ..\MAIN.c	   447  //****************************************************************************
+; ..\MAIN.c	   448  
+; ..\MAIN.c	   449  // USER CODE BEGIN (Main,1)
+; ..\MAIN.c	   450  
+; ..\MAIN.c	   451  // USER CODE END
+; ..\MAIN.c	   452  
+; ..\MAIN.c	   453  void main(void)
+; Function _main
+_184:
+_main	.proc	far
+
+; ..\MAIN.c	   454  {
+; ..\MAIN.c	   455  //unsigned int timer=0;
+; ..\MAIN.c	   456  
+; ..\MAIN.c	   457   // USER CODE BEGIN (Main,2)
+; ..\MAIN.c	   458  
+; ..\MAIN.c	   459    // USER CODE END
+; ..\MAIN.c	   460  
+; ..\MAIN.c	   461    MAIN_vInit();
+	call	_MAIN_vInit
+_421:
+
+; ..\MAIN.c	   462  
+; ..\MAIN.c	   463    // USER CODE BEGIN (Main,3)
+; ..\MAIN.c	   464    port_init();
+	call	_port_init
+_422:
+
+; ..\MAIN.c	   465    timer2_init();
+	call	_timer2_init
+_423:
+
+; ..\MAIN.c	   466    while(1) {
+	jmp	_5
+_6:
+
+; ..\MAIN.c	   467    for(int i = 0; i < 10; i++) {
+	movw	r12,#0x0
+_291:
+	jmp	_7
+_8:
+
+; ..\MAIN.c	   468  	  for(int j = 0; j < 10; j++) {
+	movw	r13,#0x0
+_292:
+	jmp	_9
+
+; ..\MAIN.c	   469  		  while(GPT12E_T6CON_T6OTL == 1) {
+_12:
+
+; ..\MAIN.c	   470  		  lightDigit2(Segments0To9[j]);
+	movb	rl2,[r13+#_Segments0To9]
+	call	_lightDigit2
+_11:
+	jb	0xff48.10,_12
+_424:
+	addw	r13,#0x1
+_9:
+	cmpw	r13,#0xa
+	jmp	cc_slt,_11
+_284:
+
+; ..\MAIN.c	   471  		  }
+; ..\MAIN.c	   472  	  }
+; ..\MAIN.c	   473    while(GPT12E_T6CON_T6OTL == 1) {
+	jmp	_13
+_14:
+
+; ..\MAIN.c	   474  	  lightDigit1(Segments0To9[i]);
+	movb	rl2,[r12+#_Segments0To9]
+	call	_lightDigit1
+_13:
+	jb	0xff48.10,_14
+_425:
+	addw	r12,#0x1
+_7:
+	cmpw	r12,#0xa
+	jmp	cc_slt,_8
+_5:
+	movw	r11,#0x1
+_426:
+	jmp	cc_ne,_6
+_427:
+
+; ..\MAIN.c	   475    }
+; ..\MAIN.c	   476  
+; ..\MAIN.c	   477    }
+; ..\MAIN.c	   478    }
+; ..\MAIN.c	   479  
+; ..\MAIN.c	   480  
+; ..\MAIN.c	   481  //  timer2_init();
+; ..\MAIN.c	   482  //  // USER CODE END
+; ..\MAIN.c	   483  
+; ..\MAIN.c	   484  //	do{
+; ..\MAIN.c	   485  //		if (P3_IN == 0)
+; ..\MAIN.c	   486  //		{
+; ..\MAIN.c	   487  //			while (P3_IN == 0)
+; ..\MAIN.c	   488  //				{
+; ..\MAIN.c	   489  //			      Lauflicht ();
+; ..\MAIN.c	   490  //				}
+; ..\MAIN.c	   491  //			timer = GPT12E_T3;
+; ..\MAIN.c	   492  //			switch (timer){
+; ..\MAIN.c	   493  //			case 0xFFFA: Wuerfel_1();
+; ..\MAIN.c	   494  //					break;
+; ..\MAIN.c	   495  //			case 0xFFFB: Wuerfel_2();
+; ..\MAIN.c	   496  //					break;
+; ..\MAIN.c	   497  //			case 0xFFFC: Wuerfel_3();
+; ..\MAIN.c	   498  //					break;
+; ..\MAIN.c	   499  //			case 0xFFFD: Wuerfel_4();
+; ..\MAIN.c	   500  //					break;
+; ..\MAIN.c	   501  //			case 0xFFFE: Wuerfel_5();
+; ..\MAIN.c	   502  //					break;
+; ..\MAIN.c	   503  //			case 0xFFFF: Wuerfel_6();
+; ..\MAIN.c	   504  //					break;
+; ..\MAIN.c	   505  //			default: Wuerfel_1();
+; ..\MAIN.c	   506  //			}
+; ..\MAIN.c	   507  //		}
+; ..\MAIN.c	   508  //		}while (1);
+; ..\MAIN.c	   509     // USER CODE BEGIN (Main,4)
+; ..\MAIN.c	   510  
+; ..\MAIN.c	   511     // USER CODE END
+; ..\MAIN.c	   512  
+; ..\MAIN.c	   513  } //  End of function main
+	ret
+_273:
+	; End of function
+	; End of section
+
+near_Segments0To9	.section	near, byte, init, cluster 'Segments0To9', new
+	.global	_Segments0To9
+_Segments0To9	.label	nearbyte
+	.db	0x3f
+	.db	0x5e
+	.db	0x1e
+	.db	0x4c
+	.db	0xc
+	.db	0x40
+	.db	0x40
+	.db	0x40
+	.db	0x40
+	.db	0x40
+	; End of section
+
+	.calls	'_MAIN_vInit','_MAIN_vUnlockProtecReg'
+	.calls	'_MAIN_vInit','_MAIN_vChangeFreq'
+	.calls	'_MAIN_vInit','_MAIN_vLockProtecReg'
+	.calls	'_main','_MAIN_vInit'
+	.calls	'_main','_port_init'
+	.calls	'_main','_timer2_init'
+	.calls	'_main','_lightDigit2'
+	.calls	'_main','_lightDigit1'
+	.calls	'_MAIN_vInit','',4,0
+	.calls	'_MAIN_vUnlockProtecReg','',4,0
+	.calls	'_MAIN_vLockProtecReg','',4,0
+	.calls	'_MAIN_vChangeFreq','',4,0
+	.calls	'_port_init','',4,0
+	.calls	'_lightDigit1','',4,0
+	.calls	'_lightDigit2','',4,0
+	.calls	'_Segment_0','',4,0
+	.calls	'_Segment_1','',4,0
+	.calls	'_Segment_2','',4,0
+	.calls	'_Segment_3','',4,0
+	.calls	'_Segment_4','',4,0
+	.calls	'_Segment_5','',4,0
+	.calls	'_timer2_init','',4,0
+	.calls	'_main','',4,0
+	.extern	__cstart : far
+	.debug		.debug_info
+_196:
+	.dl	254
+	.dw	3
+	.dl	_197
+	.db	4
+_195:
+	.db	1
+	.db	'..\\MAIN.c',0
+	.db	'TASKING VX-toolset Lite for C166: C compiler',0
+	.db	'C:\\Users\\Moritz\\builds\\infineonxc2287\\Counter\\Debug\\',0,12,1
+	.dl	_198
+	.db	2
+	.db	'__nop',0,6,1,1,1,1
+_276:
+	.db	3
+	.db	'unsigned int',0,2,7
+_279:
+	.db	3
+	.db	'unsigned char',0,1,8
+_282:
+	.db	3
+	.db	'int',0,2,5,4
+	.db	'void',0,5,2
+	.dl	178
+	.db	6
+	.db	'__prof_adm',0,1,1,1
+	.dl	184
+	.db	3
+	.db	'unsigned long int',0,4,7,6
+	.db	'__codeptr',0,1,1,1
+	.dl	209
+_286:
+	.db	7,10
+	.dl	154
+	.db	8,9,0,0
+	; End of section
+
+	.debug		.debug_abbrev
+_197:
+	.db	1,17,1,3,8,37,8,27,8,19,15,128,70,12,16,6,0,0,2,46,0,3,8,51,15,54,15,39,12,63,12,60,12,0,0,3,36,0,3,8
+	.db	11,15,62,15,0,0,4,59,0,3,8,0,0,5,15,0,51,15,73,19,0,0,6,22,0,3,8,58,15,59,15,57,15,73,19,0,0,7,1,1,11
+	.db	15,73,19,0,0,8,33,0,47,15,0,0,0
+	; End of section
+
+	.debug		.debug_line
+_198:
+	.dl	_294-_293
+_293:
+	.dw	3
+	.dl	_296-_295
+_295:
+	.db	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.db	'..\\MAIN.c',0,0,0,0,0
+_296:
+_294:
+	; End of section
+
+	.debug		.debug_info, cluster 'MAIN_vUnlockProtecReg'
+_199:
+	.dl	222
+	.dw	3
+	.dl	_200
+	.db	4,1
+	.db	'..\\MAIN.c',0
+	.db	'TASKING VX-toolset Lite for C166: C compiler',0
+	.db	'C:\\Users\\Moritz\\builds\\infineonxc2287\\Counter\\Debug\\',0,12,1
+	.dl	_202,_201
+	.db	2
+	.dl	_195
+	.db	3
+	.db	'MAIN_vUnlockProtecReg',0,1,103,6,6,1,1,1
+	.dl	_28,_203,_27
+	.db	12,19,146,176,2,0,64,36,146,161,2,0,33,4
+	.dl	_28,_203
+	.db	5
+	.db	'uwPASSWORD',0,1,105,9,2
+	.dl	_276,_277
+	.db	0,0,0
+	; End of section
+
+	.debug		.debug_abbrev, cluster 'MAIN_vUnlockProtecReg'
+_200:
+	.db	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,51,15
+	.db	54,15,39,12,63,12,17,1,18,1,64,6,42,9,0,0,4,11,1,17,1,18,1,0,0,5,52,0,3,8,58,15,59,15,57,15,51,15,73,16
+	.db	2,6,0,0,0
+	; End of section
+
+	.debug		.debug_line, cluster 'MAIN_vUnlockProtecReg'
+_201:
+	.dl	_298-_297
+_297:
+	.dw	3
+	.dl	_300-_299
+_299:
+	.db	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.db	'..\\MAIN.c',0,0,0,0,0
+_300:
+	.db	5,13,7,0,5,2
+	.dl	_28
+	.db	3,234,0,1,9
+	.dw	_301-_28
+	.db	3,1,1,5,18,9
+	.dw	_302-_301
+	.db	3,2,1,5,26,9
+	.dw	_287-_302
+	.db	1,5,19,9
+	.dw	_303-_287
+	.db	3,1,1,5,32,9
+	.dw	_304-_303
+	.db	1,5,22,9
+	.dw	_305-_304
+	.db	3,2,1,5,13,9
+	.dw	_306-_305
+	.db	1,9
+	.dw	_307-_306
+	.db	3,1,1,5,1,9
+	.dw	_308-_307
+	.db	3,2,1,7,9
+	.dw	_203-_308
+	.db	0,1,1
+_298:
+	; End of section
+
+	.debug		.debug_ranges, cluster 'MAIN_vUnlockProtecReg'
+_202:
+	.dl	-1,_28,0,_203-_28,0,0
+	; End of section
+
+	.debug		.debug_info, cluster 'MAIN_vLockProtecReg'
+_204:
+	.dl	222
+	.dw	3
+	.dl	_205
+	.db	4,1
+	.db	'..\\MAIN.c',0
+	.db	'TASKING VX-toolset Lite for C166: C compiler',0
+	.db	'C:\\Users\\Moritz\\builds\\infineonxc2287\\Counter\\Debug\\',0,12,1
+	.dl	_207,_206
+	.db	2
+	.dl	_195
+	.db	3
+	.db	'MAIN_vLockProtecReg',0,1,141,1,6,6,1,1,1
+	.dl	_40,_208,_39
+	.db	12,19,146,176,2,0,64,36,146,161,2,0,33,4
+	.dl	_40,_208
+	.db	5
+	.db	'uwPASSWORD',0,1,143,1,9,2
+	.dl	_276,_278
+	.db	0,0,0
+	; End of section
+
+	.debug		.debug_abbrev, cluster 'MAIN_vLockProtecReg'
+_205:
+	.db	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,51,15
+	.db	54,15,39,12,63,12,17,1,18,1,64,6,42,9,0,0,4,11,1,17,1,18,1,0,0,5,52,0,3,8,58,15,59,15,57,15,51,15,73,16
+	.db	2,6,0,0,0
+	; End of section
+
+	.debug		.debug_line, cluster 'MAIN_vLockProtecReg'
+_206:
+	.dl	_310-_309
+_309:
+	.dw	3
+	.dl	_312-_311
+_311:
+	.db	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.db	'..\\MAIN.c',0,0,0,0,0
+_312:
+	.db	5,13,7,0,5,2
+	.dl	_40
+	.db	3,144,1,1,9
+	.dw	_313-_40
+	.db	3,1,1,5,18,9
+	.dw	_314-_313
+	.db	3,2,1,5,26,9
+	.dw	_288-_314
+	.db	1,5,19,9
+	.dw	_315-_288
+	.db	3,1,1,5,32,9
+	.dw	_316-_315
+	.db	1,5,22,9
+	.dw	_317-_316
+	.db	3,2,1,5,13,9
+	.dw	_318-_317
+	.db	1,9
+	.dw	_319-_318
+	.db	3,1,1,5,18,9
+	.dw	_320-_319
+	.db	3,2,1,5,26,9
+	.dw	_321-_320
+	.db	1,5,19,9
+	.dw	_322-_321
+	.db	3,1,1,5,32,9
+	.dw	_323-_322
+	.db	1,5,22,9
+	.dw	_324-_323
+	.db	3,1,1,5,13,9
+	.dw	_325-_324
+	.db	1,5,1,9
+	.dw	_326-_325
+	.db	3,2,1,7,9
+	.dw	_208-_326
+	.db	0,1,1
+_310:
+	; End of section
+
+	.debug		.debug_ranges, cluster 'MAIN_vLockProtecReg'
+_207:
+	.dl	-1,_40,0,_208-_40,0,0
+	; End of section
+
+	.debug		.debug_info, cluster 'MAIN_vChangeFreq'
+_209:
+	.dl	193
+	.dw	3
+	.dl	_210
+	.db	4,1
+	.db	'..\\MAIN.c',0
+	.db	'TASKING VX-toolset Lite for C166: C compiler',0
+	.db	'C:\\Users\\Moritz\\builds\\infineonxc2287\\Counter\\Debug\\',0,12,1
+	.dl	_212,_211
+	.db	2
+	.dl	_195
+	.db	3
+	.db	'MAIN_vChangeFreq',0,1,183,1,6,6,1,1,1
+	.dl	_52,_213,_51
+	.db	12,19,146,176,2,0,64,36,146,161,2,0,33,4
+	.dl	_52,_213
+	.db	0,0
+	; End of section
+
+	.debug		.debug_abbrev, cluster 'MAIN_vChangeFreq'
+_210:
+	.db	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,51,15
+	.db	54,15,39,12,63,12,17,1,18,1,64,6,42,9,0,0,4,11,0,17,1,18,1,0,0,0
+	; End of section
+
+	.debug		.debug_line, cluster 'MAIN_vChangeFreq'
+_211:
+	.dl	_328-_327
+_327:
+	.dw	3
+	.dl	_330-_329
+_329:
+	.db	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.db	'..\\MAIN.c',0,0,0,0,0
+_330:
+	.db	5,9,7,0,5,2
+	.dl	_52
+	.db	3,190,1,1,5,3,9
+	.dw	_331-_52
+	.db	1,5,10,7,9
+	.dw	_332-_331
+	.db	3,18,1,5,1,9
+	.dw	_2-_332
+	.db	3,18,1,7,9
+	.dw	_213-_2
+	.db	0,1,1
+_328:
+	; End of section
+
+	.debug		.debug_ranges, cluster 'MAIN_vChangeFreq'
+_212:
+	.dl	-1,_52,0,_213-_52,0,0
+	; End of section
+
+	.debug		.debug_info, cluster 'MAIN_vInit'
+_214:
+	.dl	186
+	.dw	3
+	.dl	_215
+	.db	4,1
+	.db	'..\\MAIN.c',0
+	.db	'TASKING VX-toolset Lite for C166: C compiler',0
+	.db	'C:\\Users\\Moritz\\builds\\infineonxc2287\\Counter\\Debug\\',0,12,1
+	.dl	_217,_216
+	.db	2
+	.dl	_195
+	.db	3
+	.db	'MAIN_vInit',0,1,19,6,6,1,1,1
+	.dl	_16,_218,_15
+	.db	12,19,146,176,2,0,64,36,146,161,2,0,33,4
+	.dl	_16,_218
+	.db	0,0
+	; End of section
+
+	.debug		.debug_abbrev, cluster 'MAIN_vInit'
+_215:
+	.db	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,51,15
+	.db	54,15,39,12,63,12,17,1,18,1,64,6,42,9,0,0,4,11,0,17,1,18,1,0,0,0
+	; End of section
+
+	.debug		.debug_line, cluster 'MAIN_vInit'
+_216:
+	.dl	_334-_333
+_333:
+	.dw	3
+	.dl	_336-_335
+_335:
+	.db	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.db	'..\\MAIN.c',0,0,0,0,0
+_336:
+	.db	5,18,7,0,5,2
+	.dl	_16
+	.db	3,26,1,5,24,9
+	.dw	_337-_16
+	.db	3,10,1,5,19,9
+	.dw	_338-_337
+	.db	3,2,1,5,20,9
+	.dw	_339-_338
+	.db	3,10,1,5,9,9
+	.dw	_340-_339
+	.db	3,1,1,9
+	.dw	_341-_340
+	.db	3,1,1,5,18,9
+	.dw	_342-_341
+	.db	3,5,1,9
+	.dw	_343-_342
+	.db	3,11,1,5,22,9
+	.dw	_344-_343
+	.db	3,6,1,5,18,9
+	.dw	_345-_344
+	.db	3,3,1,5,1,9
+	.dw	_346-_345
+	.db	3,2,1,7,9
+	.dw	_218-_346
+	.db	0,1,1
+_334:
+	; End of section
+
+	.debug		.debug_ranges, cluster 'MAIN_vInit'
+_217:
+	.dl	-1,_16,0,_218-_16,0,0
+	; End of section
+
+	.debug		.debug_info, cluster 'port_init'
+_219:
+	.dl	186
+	.dw	3
+	.dl	_220
+	.db	4,1
+	.db	'..\\MAIN.c',0
+	.db	'TASKING VX-toolset Lite for C166: C compiler',0
+	.db	'C:\\Users\\Moritz\\builds\\infineonxc2287\\Counter\\Debug\\',0,12,1
+	.dl	_222,_221
+	.db	2
+	.dl	_195
+	.db	3
+	.db	'port_init',0,1,229,1,6,6,1,1,1
+	.dl	_64,_223,_63
+	.db	12,19,146,176,2,0,64,36,146,161,2,0,33,4
+	.dl	_64,_223
+	.db	0,0
+	; End of section
+
+	.debug		.debug_abbrev, cluster 'port_init'
+_220:
+	.db	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,51,15
+	.db	54,15,39,12,63,12,17,1,18,1,64,6,42,9,0,0,4,11,0,17,1,18,1,0,0,0
+	; End of section
+
+	.debug		.debug_line, cluster 'port_init'
+_221:
+	.dl	_348-_347
+_347:
+	.dw	3
+	.dl	_350-_349
+_349:
+	.db	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.db	'..\\MAIN.c',0,0,0,0,0
+_350:
+	.db	5,15,7,0,5,2
+	.dl	_64
+	.db	3,232,1,1,5,13,9
+	.dw	_351-_64
+	.db	1,5,14,9
+	.dw	_352-_351
+	.db	3,1,1,5,13,9
+	.dw	_353-_352
+	.db	3,1,1,9
+	.dw	_354-_353
+	.db	3,1,1,9
+	.dw	_355-_354
+	.db	3,1,1,9
+	.dw	_356-_355
+	.db	3,1,1,9
+	.dw	_357-_356
+	.db	3,1,1,5,14,9
+	.dw	_358-_357
+	.db	3,1,1,5,12,9
+	.dw	_359-_358
+	.db	3,2,1,9
+	.dw	_360-_359
+	.db	3,1,1,9
+	.dw	_361-_360
+	.db	3,4,1,9
+	.dw	_362-_361
+	.db	3,2,1,5,14,9
+	.dw	_363-_362
+	.db	3,2,1,5,12,9
+	.dw	_364-_363
+	.db	1,5,9,9
+	.dw	_365-_364
+	.db	3,3,1,5,8,9
+	.dw	_366-_365
+	.db	3,2,1,5,1,9
+	.dw	_367-_366
+	.db	3,1,1,7,9
+	.dw	_223-_367
+	.db	0,1,1
+_348:
+	; End of section
+
+	.debug		.debug_ranges, cluster 'port_init'
+_222:
+	.dl	-1,_64,0,_223-_64,0,0
+	; End of section
+
+	.debug		.debug_info, cluster 'lightDigit1'
+_224:
+	.dl	208
+	.dw	3
+	.dl	_225
+	.db	4,1
+	.db	'..\\MAIN.c',0
+	.db	'TASKING VX-toolset Lite for C166: C compiler',0
+	.db	'C:\\Users\\Moritz\\builds\\infineonxc2287\\Counter\\Debug\\',0,12,1
+	.dl	_227,_226
+	.db	2
+	.dl	_195
+	.db	3
+	.db	'lightDigit1',0,1,131,2,6,6,1,1,1
+	.dl	_76,_228,_75
+	.db	12,19,146,176,2,0,64,36,146,161,2,0,33,4
+	.db	'number',0,1,131,2,32
+	.dl	_279,_280
+	.db	5
+	.dl	_76,_228
+	.db	0,0
+	; End of section
+
+	.debug		.debug_abbrev, cluster 'lightDigit1'
+_225:
+	.db	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,51,15
+	.db	54,15,39,12,63,12,17,1,18,1,64,6,42,9,0,0,4,5,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,5,11,0,17,1,18,1,0
+	.db	0,0
+	; End of section
+
+	.debug		.debug_line, cluster 'lightDigit1'
+_226:
+	.dl	_369-_368
+_368:
+	.dw	3
+	.dl	_371-_370
+_370:
+	.db	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.db	'..\\MAIN.c',0,0,0,0,0
+_371:
+	.db	5,9,7,0,5,2
+	.dl	_76
+	.db	3,131,2,1,5,12,9
+	.dw	_372-_76
+	.db	3,1,1,5,10,9
+	.dw	_289-_372
+	.db	1,5,1,9
+	.dw	_373-_289
+	.db	3,1,1,7,9
+	.dw	_228-_373
+	.db	0,1,1
+_369:
+	; End of section
+
+	.debug		.debug_ranges, cluster 'lightDigit1'
+_227:
+	.dl	-1,_76,0,_228-_76,0,0
+	; End of section
+
+	.debug		.debug_info, cluster 'lightDigit2'
+_229:
+	.dl	208
+	.dw	3
+	.dl	_230
+	.db	4,1
+	.db	'..\\MAIN.c',0
+	.db	'TASKING VX-toolset Lite for C166: C compiler',0
+	.db	'C:\\Users\\Moritz\\builds\\infineonxc2287\\Counter\\Debug\\',0,12,1
+	.dl	_232,_231
+	.db	2
+	.dl	_195
+	.db	3
+	.db	'lightDigit2',0,1,136,2,6,6,1,1,1
+	.dl	_88,_233,_87
+	.db	12,19,146,176,2,0,64,36,146,161,2,0,33,4
+	.db	'number',0,1,136,2,33
+	.dl	_279,_281
+	.db	5
+	.dl	_88,_233
+	.db	0,0
+	; End of section
+
+	.debug		.debug_abbrev, cluster 'lightDigit2'
+_230:
+	.db	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,51,15
+	.db	54,15,39,12,63,12,17,1,18,1,64,6,42,9,0,0,4,5,0,3,8,58,15,59,15,57,15,73,16,2,6,0,0,5,11,0,17,1,18,1,0
+	.db	0,0
+	; End of section
+
+	.debug		.debug_line, cluster 'lightDigit2'
+_231:
+	.dl	_375-_374
+_374:
+	.dw	3
+	.dl	_377-_376
+_376:
+	.db	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.db	'..\\MAIN.c',0,0,0,0,0
+_377:
+	.db	5,9,7,0,5,2
+	.dl	_88
+	.db	3,136,2,1,5,12,9
+	.dw	_378-_88
+	.db	3,1,1,5,10,9
+	.dw	_290-_378
+	.db	1,5,1,9
+	.dw	_379-_290
+	.db	3,1,1,7,9
+	.dw	_233-_379
+	.db	0,1,1
+_375:
+	; End of section
+
+	.debug		.debug_ranges, cluster 'lightDigit2'
+_232:
+	.dl	-1,_88,0,_233-_88,0,0
+	; End of section
+
+	.debug		.debug_info, cluster 'Segment_0'
+_234:
+	.dl	185
+	.dw	3
+	.dl	_235
+	.db	4,1
+	.db	'..\\MAIN.c',0
+	.db	'TASKING VX-toolset Lite for C166: C compiler',0
+	.db	'C:\\Users\\Moritz\\builds\\infineonxc2287\\Counter\\Debug\\',0,12,1
+	.dl	_237,_236
+	.db	2
+	.dl	_195
+	.db	3
+	.db	'Segment_0',0,1,176,2,6,6,1,1
+	.dl	_100,_238,_99
+	.db	12,19,146,176,2,0,64,36,146,161,2,0,33,4
+	.dl	_100,_238
+	.db	0,0
+	; End of section
+
+	.debug		.debug_abbrev, cluster 'Segment_0'
+_235:
+	.db	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,51,15
+	.db	54,15,63,12,17,1,18,1,64,6,42,9,0,0,4,11,0,17,1,18,1,0,0,0
+	; End of section
+
+	.debug		.debug_line, cluster 'Segment_0'
+_236:
+	.dl	_381-_380
+_380:
+	.dw	3
+	.dl	_383-_382
+_382:
+	.db	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.db	'..\\MAIN.c',0,0,0,0,0
+_383:
+	.db	5,10,7,0,5,2
+	.dl	_100
+	.db	3,177,2,1,5,1,9
+	.dw	_384-_100
+	.db	3,1,1,7,9
+	.dw	_238-_384
+	.db	0,1,1
+_381:
+	; End of section
+
+	.debug		.debug_ranges, cluster 'Segment_0'
+_237:
+	.dl	-1,_100,0,_238-_100,0,0
+	; End of section
+
+	.debug		.debug_info, cluster 'Segment_1'
+_239:
+	.dl	185
+	.dw	3
+	.dl	_240
+	.db	4,1
+	.db	'..\\MAIN.c',0
+	.db	'TASKING VX-toolset Lite for C166: C compiler',0
+	.db	'C:\\Users\\Moritz\\builds\\infineonxc2287\\Counter\\Debug\\',0,12,1
+	.dl	_242,_241
+	.db	2
+	.dl	_195
+	.db	3
+	.db	'Segment_1',0,1,180,2,6,6,1,1
+	.dl	_112,_243,_111
+	.db	12,19,146,176,2,0,64,36,146,161,2,0,33,4
+	.dl	_112,_243
+	.db	0,0
+	; End of section
+
+	.debug		.debug_abbrev, cluster 'Segment_1'
+_240:
+	.db	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,51,15
+	.db	54,15,63,12,17,1,18,1,64,6,42,9,0,0,4,11,0,17,1,18,1,0,0,0
+	; End of section
+
+	.debug		.debug_line, cluster 'Segment_1'
+_241:
+	.dl	_386-_385
+_385:
+	.dw	3
+	.dl	_388-_387
+_387:
+	.db	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.db	'..\\MAIN.c',0,0,0,0,0
+_388:
+	.db	5,10,7,0,5,2
+	.dl	_112
+	.db	3,181,2,1,5,1,9
+	.dw	_389-_112
+	.db	3,2,1,7,9
+	.dw	_243-_389
+	.db	0,1,1
+_386:
+	; End of section
+
+	.debug		.debug_ranges, cluster 'Segment_1'
+_242:
+	.dl	-1,_112,0,_243-_112,0,0
+	; End of section
+
+	.debug		.debug_info, cluster 'Segment_2'
+_244:
+	.dl	185
+	.dw	3
+	.dl	_245
+	.db	4,1
+	.db	'..\\MAIN.c',0
+	.db	'TASKING VX-toolset Lite for C166: C compiler',0
+	.db	'C:\\Users\\Moritz\\builds\\infineonxc2287\\Counter\\Debug\\',0,12,1
+	.dl	_247,_246
+	.db	2
+	.dl	_195
+	.db	3
+	.db	'Segment_2',0,1,186,2,6,6,1,1
+	.dl	_124,_248,_123
+	.db	12,19,146,176,2,0,64,36,146,161,2,0,33,4
+	.dl	_124,_248
+	.db	0,0
+	; End of section
+
+	.debug		.debug_abbrev, cluster 'Segment_2'
+_245:
+	.db	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,51,15
+	.db	54,15,63,12,17,1,18,1,64,6,42,9,0,0,4,11,0,17,1,18,1,0,0,0
+	; End of section
+
+	.debug		.debug_line, cluster 'Segment_2'
+_246:
+	.dl	_391-_390
+_390:
+	.dw	3
+	.dl	_393-_392
+_392:
+	.db	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.db	'..\\MAIN.c',0,0,0,0,0
+_393:
+	.db	5,10,7,0,5,2
+	.dl	_124
+	.db	3,187,2,1,5,1,9
+	.dw	_394-_124
+	.db	3,2,1,7,9
+	.dw	_248-_394
+	.db	0,1,1
+_391:
+	; End of section
+
+	.debug		.debug_ranges, cluster 'Segment_2'
+_247:
+	.dl	-1,_124,0,_248-_124,0,0
+	; End of section
+
+	.debug		.debug_info, cluster 'Segment_3'
+_249:
+	.dl	185
+	.dw	3
+	.dl	_250
+	.db	4,1
+	.db	'..\\MAIN.c',0
+	.db	'TASKING VX-toolset Lite for C166: C compiler',0
+	.db	'C:\\Users\\Moritz\\builds\\infineonxc2287\\Counter\\Debug\\',0,12,1
+	.dl	_252,_251
+	.db	2
+	.dl	_195
+	.db	3
+	.db	'Segment_3',0,1,192,2,6,6,1,1
+	.dl	_136,_253,_135
+	.db	12,19,146,176,2,0,64,36,146,161,2,0,33,4
+	.dl	_136,_253
+	.db	0,0
+	; End of section
+
+	.debug		.debug_abbrev, cluster 'Segment_3'
+_250:
+	.db	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,51,15
+	.db	54,15,63,12,17,1,18,1,64,6,42,9,0,0,4,11,0,17,1,18,1,0,0,0
+	; End of section
+
+	.debug		.debug_line, cluster 'Segment_3'
+_251:
+	.dl	_396-_395
+_395:
+	.dw	3
+	.dl	_398-_397
+_397:
+	.db	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.db	'..\\MAIN.c',0,0,0,0,0
+_398:
+	.db	5,10,7,0,5,2
+	.dl	_136
+	.db	3,193,2,1,5,1,9
+	.dw	_399-_136
+	.db	3,2,1,7,9
+	.dw	_253-_399
+	.db	0,1,1
+_396:
+	; End of section
+
+	.debug		.debug_ranges, cluster 'Segment_3'
+_252:
+	.dl	-1,_136,0,_253-_136,0,0
+	; End of section
+
+	.debug		.debug_info, cluster 'Segment_4'
+_254:
+	.dl	185
+	.dw	3
+	.dl	_255
+	.db	4,1
+	.db	'..\\MAIN.c',0
+	.db	'TASKING VX-toolset Lite for C166: C compiler',0
+	.db	'C:\\Users\\Moritz\\builds\\infineonxc2287\\Counter\\Debug\\',0,12,1
+	.dl	_257,_256
+	.db	2
+	.dl	_195
+	.db	3
+	.db	'Segment_4',0,1,198,2,6,6,1,1
+	.dl	_148,_258,_147
+	.db	12,19,146,176,2,0,64,36,146,161,2,0,33,4
+	.dl	_148,_258
+	.db	0,0
+	; End of section
+
+	.debug		.debug_abbrev, cluster 'Segment_4'
+_255:
+	.db	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,51,15
+	.db	54,15,63,12,17,1,18,1,64,6,42,9,0,0,4,11,0,17,1,18,1,0,0,0
+	; End of section
+
+	.debug		.debug_line, cluster 'Segment_4'
+_256:
+	.dl	_401-_400
+_400:
+	.dw	3
+	.dl	_403-_402
+_402:
+	.db	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.db	'..\\MAIN.c',0,0,0,0,0
+_403:
+	.db	5,10,7,0,5,2
+	.dl	_148
+	.db	3,199,2,1,5,1,9
+	.dw	_404-_148
+	.db	3,2,1,7,9
+	.dw	_258-_404
+	.db	0,1,1
+_401:
+	; End of section
+
+	.debug		.debug_ranges, cluster 'Segment_4'
+_257:
+	.dl	-1,_148,0,_258-_148,0,0
+	; End of section
+
+	.debug		.debug_info, cluster 'Segment_5'
+_259:
+	.dl	185
+	.dw	3
+	.dl	_260
+	.db	4,1
+	.db	'..\\MAIN.c',0
+	.db	'TASKING VX-toolset Lite for C166: C compiler',0
+	.db	'C:\\Users\\Moritz\\builds\\infineonxc2287\\Counter\\Debug\\',0,12,1
+	.dl	_262,_261
+	.db	2
+	.dl	_195
+	.db	3
+	.db	'Segment_5',0,1,204,2,6,6,1,1
+	.dl	_160,_263,_159
+	.db	12,19,146,176,2,0,64,36,146,161,2,0,33,4
+	.dl	_160,_263
+	.db	0,0
+	; End of section
+
+	.debug		.debug_abbrev, cluster 'Segment_5'
+_260:
+	.db	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,51,15
+	.db	54,15,63,12,17,1,18,1,64,6,42,9,0,0,4,11,0,17,1,18,1,0,0,0
+	; End of section
+
+	.debug		.debug_line, cluster 'Segment_5'
+_261:
+	.dl	_406-_405
+_405:
+	.dw	3
+	.dl	_408-_407
+_407:
+	.db	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.db	'..\\MAIN.c',0,0,0,0,0
+_408:
+	.db	5,10,7,0,5,2
+	.dl	_160
+	.db	3,205,2,1,5,1,9
+	.dw	_409-_160
+	.db	3,2,1,7,9
+	.dw	_263-_409
+	.db	0,1,1
+_406:
+	; End of section
+
+	.debug		.debug_ranges, cluster 'Segment_5'
+_262:
+	.dl	-1,_160,0,_263-_160,0,0
+	; End of section
+
+	.debug		.debug_info, cluster 'timer2_init'
+_264:
+	.dl	188
+	.dw	3
+	.dl	_265
+	.db	4,1
+	.db	'..\\MAIN.c',0
+	.db	'TASKING VX-toolset Lite for C166: C compiler',0
+	.db	'C:\\Users\\Moritz\\builds\\infineonxc2287\\Counter\\Debug\\',0,12,1
+	.dl	_267,_266
+	.db	2
+	.dl	_195
+	.db	3
+	.db	'timer2_init',0,1,240,2,6,6,1,1,1
+	.dl	_172,_268,_171
+	.db	12,19,146,176,2,0,64,36,146,161,2,0,33,4
+	.dl	_172,_268
+	.db	0,0
+	; End of section
+
+	.debug		.debug_abbrev, cluster 'timer2_init'
+_265:
+	.db	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,51,15
+	.db	54,15,39,12,63,12,17,1,18,1,64,6,42,9,0,0,4,11,0,17,1,18,1,0,0,0
+	; End of section
+
+	.debug		.debug_line, cluster 'timer2_init'
+_266:
+	.dl	_411-_410
+_410:
+	.dw	3
+	.dl	_413-_412
+_412:
+	.db	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.db	'..\\MAIN.c',0,0,0,0,0
+_413:
+	.db	5,12,7,0,5,2
+	.dl	_172
+	.db	3,241,2,1,5,16,9
+	.dw	_414-_172
+	.db	3,1,1,5,15,9
+	.dw	_415-_414
+	.db	3,12,1,5,1,9
+	.dw	_416-_415
+	.db	3,2,1,7,9
+	.dw	_268-_416
+	.db	0,1,1
+_411:
+	; End of section
+
+	.debug		.debug_ranges, cluster 'timer2_init'
+_267:
+	.dl	-1,_172,0,_268-_172,0,0
+	; End of section
+
+	.debug		.debug_info, cluster 'main'
+_269:
+	.dl	234
+	.dw	3
+	.dl	_270
+	.db	4,1
+	.db	'..\\MAIN.c',0
+	.db	'TASKING VX-toolset Lite for C166: C compiler',0
+	.db	'C:\\Users\\Moritz\\builds\\infineonxc2287\\Counter\\Debug\\',0,12,1
+	.dl	_272,_271
+	.db	2
+	.dl	_195
+	.db	3
+	.db	'main',0,1,197,3,6,6,1,1,1
+	.dl	_184,_273,_183
+	.db	12,19,146,176,2,0,64,36,146,161,2,0,33,4
+	.dl	_184,_273
+	.db	4
+	.dl	_6,_5
+	.db	5
+	.db	'i',0,1,211,3,11,2
+	.dl	_282,_283
+	.db	4
+	.dl	_8,_284
+	.db	5
+	.db	'j',0,1,212,3,12,2
+	.dl	_282,_285
+	.db	0,0,0,0,0
+	; End of section
+
+	.debug		.debug_abbrev, cluster 'main'
+_270:
+	.db	1,17,1,3,8,37,8,27,8,19,15,128,70,12,85,6,16,6,0,0,2,61,0,24,16,0,0,3,46,1,3,8,58,15,59,15,57,15,51,15
+	.db	54,15,39,12,63,12,17,1,18,1,64,6,42,9,0,0,4,11,1,17,1,18,1,0,0,5,52,0,3,8,58,15,59,15,57,15,51,15,73,16
+	.db	2,6,0,0,0
+	; End of section
+
+	.debug		.debug_line, cluster 'main'
+_271:
+	.dl	_418-_417
+_417:
+	.dw	3
+	.dl	_420-_419
+_419:
+	.db	2,1,-4,9,10,0,1,1,1,1,0,0,0,1,0
+	.db	'..\\MAIN.c',0,0,0,0,0
+_420:
+	.db	5,13,7,0,5,2
+	.dl	_184
+	.db	3,204,3,1,5,12,9
+	.dw	_421-_184
+	.db	3,3,1,5,14,9
+	.dw	_422-_421
+	.db	3,1,1,5,10,9
+	.dw	_423-_422
+	.db	3,1,1,5,13,9
+	.dw	_6-_423
+	.db	3,1,1,5,24,9
+	.dw	_291-_6
+	.db	1,5,14,9
+	.dw	_8-_291
+	.db	3,1,1,5,25,9
+	.dw	_292-_8
+	.db	1,5,29,9
+	.dw	_12-_292
+	.db	3,2,1,5,34,9
+	.dw	_11-_12
+	.db	3,127,1,5,28,7,9
+	.dw	_424-_11
+	.db	3,127,1,5,25,9
+	.dw	_9-_424
+	.db	1,5,32,9
+	.dw	_284-_9
+	.db	3,5,1,5,28,9
+	.dw	_14-_284
+	.db	3,1,1,5,32,9
+	.dw	_13-_14
+	.db	3,127,1,5,27,7,9
+	.dw	_425-_13
+	.db	3,122,1,5,24,9
+	.dw	_7-_425
+	.db	1,5,9,9
+	.dw	_5-_7
+	.db	3,127,1,5,10,9
+	.dw	_426-_5
+	.db	1,5,1,7,9
+	.dw	_427-_426
+	.db	3,47,1,7,9
+	.dw	_273-_427
+	.db	0,1,1
+_418:
+	; End of section
+
+	.debug		.debug_ranges, cluster 'main'
+_272:
+	.dl	-1,_184,0,_273-_184,0,0
+	; End of section
+
+	.debug		.debug_info, cluster 'Segments0To9'
+_274:
+	.dl	154
+	.dw	3
+	.dl	_275
+	.db	4,1
+	.db	'..\\MAIN.c',0
+	.db	'TASKING VX-toolset Lite for C166: C compiler',0
+	.db	'C:\\Users\\Moritz\\builds\\infineonxc2287\\Counter\\Debug\\',0,12,1,2
+	.dl	_195
+	.db	3
+	.db	'Segments0To9',0,1,210,2,15,2
+	.dl	_286
+	.db	1,5,3
+	.dl	_Segments0To9
+	.db	0
+	; End of section
+
+	.debug		.debug_abbrev, cluster 'Segments0To9'
+_275:
+	.db	1,17,1,3,8,37,8,27,8,19,15,128,70,12,0,0,2,61,0,24,16,0,0,3,52,0,3,8,58,15,59,15,57,15,51,15,73,16,63
+	.db	12,2,9,0,0,0
+	; End of section
+
+	.debug		.debug_loc, cluster 'MAIN_vChangeFreq'
+_51:
+	.dl	-1,_52,0,_213-_52
+	.dw	58
+	.db	127,0,18,10
+	.dw	16383
+	.db	26,22,62,37,18,48,46,40
+	.dw	_53-_57
+_57:
+	.db	146,177,2,0,47
+	.dw	_56-_58
+_58:
+_53:
+	.db	18,49,46,40
+	.dw	_54-_59
+_59:
+	.db	146,178,2,0,47
+	.dw	_56-_60
+_60:
+_54:
+	.db	18,50,46,40
+	.dw	_55-_61
+_61:
+	.db	146,179,2,0,47
+	.dw	_56-_62
+_62:
+_55:
+	.db	146,180,2,0
+_56:
+	.db	22,19,62,36,33
+	.dl	0,0
+	; End of section
+
+	.debug		.debug_loc, cluster 'MAIN_vInit'
+_15:
+	.dl	-1,_16,0,_218-_16
+	.dw	58
+	.db	127,0,18,10
+	.dw	16383
+	.db	26,22,62,37,18,48,46,40
+	.dw	_17-_21
+_21:
+	.db	146,177,2,0,47
+	.dw	_20-_22
+_22:
+_17:
+	.db	18,49,46,40
+	.dw	_18-_23
+_23:
+	.db	146,178,2,0,47
+	.dw	_20-_24
+_24:
+_18:
+	.db	18,50,46,40
+	.dw	_19-_25
+_25:
+	.db	146,179,2,0,47
+	.dw	_20-_26
+_26:
+_19:
+	.db	146,180,2,0
+_20:
+	.db	22,19,62,36,33
+	.dl	0,0
+	; End of section
+
+	.debug		.debug_loc, cluster 'MAIN_vLockProtecReg'
+_39:
+	.dl	-1,_40,0,_208-_40
+	.dw	58
+	.db	127,0,18,10
+	.dw	16383
+	.db	26,22,62,37,18,48,46,40
+	.dw	_41-_45
+_45:
+	.db	146,177,2,0,47
+	.dw	_44-_46
+_46:
+_41:
+	.db	18,49,46,40
+	.dw	_42-_47
+_47:
+	.db	146,178,2,0,47
+	.dw	_44-_48
+_48:
+_42:
+	.db	18,50,46,40
+	.dw	_43-_49
+_49:
+	.db	146,179,2,0,47
+	.dw	_44-_50
+_50:
+_43:
+	.db	146,180,2,0
+_44:
+	.db	22,19,62,36,33
+	.dl	0,0
+_278:
+	.dl	-1,_40,_288-_40,_208-_40
+	.dw	1
+	.db	91
+	.dl	0,0
+	; End of section
+
+	.debug		.debug_loc, cluster 'MAIN_vUnlockProtecReg'
+_27:
+	.dl	-1,_28,0,_203-_28
+	.dw	58
+	.db	127,0,18,10
+	.dw	16383
+	.db	26,22,62,37,18,48,46,40
+	.dw	_29-_33
+_33:
+	.db	146,177,2,0,47
+	.dw	_32-_34
+_34:
+_29:
+	.db	18,49,46,40
+	.dw	_30-_35
+_35:
+	.db	146,178,2,0,47
+	.dw	_32-_36
+_36:
+_30:
+	.db	18,50,46,40
+	.dw	_31-_37
+_37:
+	.db	146,179,2,0,47
+	.dw	_32-_38
+_38:
+_31:
+	.db	146,180,2,0
+_32:
+	.db	22,19,62,36,33
+	.dl	0,0
+_277:
+	.dl	-1,_28,_287-_28,_203-_28
+	.dw	1
+	.db	91
+	.dl	0,0
+	; End of section
+
+	.debug		.debug_loc, cluster 'Segment_0'
+_99:
+	.dl	-1,_100,0,_238-_100
+	.dw	58
+	.db	127,0,18,10
+	.dw	16383
+	.db	26,22,62,37,18,48,46,40
+	.dw	_101-_105
+_105:
+	.db	146,177,2,0,47
+	.dw	_104-_106
+_106:
+_101:
+	.db	18,49,46,40
+	.dw	_102-_107
+_107:
+	.db	146,178,2,0,47
+	.dw	_104-_108
+_108:
+_102:
+	.db	18,50,46,40
+	.dw	_103-_109
+_109:
+	.db	146,179,2,0,47
+	.dw	_104-_110
+_110:
+_103:
+	.db	146,180,2,0
+_104:
+	.db	22,19,62,36,33
+	.dl	0,0
+	; End of section
+
+	.debug		.debug_loc, cluster 'Segment_1'
+_111:
+	.dl	-1,_112,0,_243-_112
+	.dw	58
+	.db	127,0,18,10
+	.dw	16383
+	.db	26,22,62,37,18,48,46,40
+	.dw	_113-_117
+_117:
+	.db	146,177,2,0,47
+	.dw	_116-_118
+_118:
+_113:
+	.db	18,49,46,40
+	.dw	_114-_119
+_119:
+	.db	146,178,2,0,47
+	.dw	_116-_120
+_120:
+_114:
+	.db	18,50,46,40
+	.dw	_115-_121
+_121:
+	.db	146,179,2,0,47
+	.dw	_116-_122
+_122:
+_115:
+	.db	146,180,2,0
+_116:
+	.db	22,19,62,36,33
+	.dl	0,0
+	; End of section
+
+	.debug		.debug_loc, cluster 'Segment_2'
+_123:
+	.dl	-1,_124,0,_248-_124
+	.dw	58
+	.db	127,0,18,10
+	.dw	16383
+	.db	26,22,62,37,18,48,46,40
+	.dw	_125-_129
+_129:
+	.db	146,177,2,0,47
+	.dw	_128-_130
+_130:
+_125:
+	.db	18,49,46,40
+	.dw	_126-_131
+_131:
+	.db	146,178,2,0,47
+	.dw	_128-_132
+_132:
+_126:
+	.db	18,50,46,40
+	.dw	_127-_133
+_133:
+	.db	146,179,2,0,47
+	.dw	_128-_134
+_134:
+_127:
+	.db	146,180,2,0
+_128:
+	.db	22,19,62,36,33
+	.dl	0,0
+	; End of section
+
+	.debug		.debug_loc, cluster 'Segment_3'
+_135:
+	.dl	-1,_136,0,_253-_136
+	.dw	58
+	.db	127,0,18,10
+	.dw	16383
+	.db	26,22,62,37,18,48,46,40
+	.dw	_137-_141
+_141:
+	.db	146,177,2,0,47
+	.dw	_140-_142
+_142:
+_137:
+	.db	18,49,46,40
+	.dw	_138-_143
+_143:
+	.db	146,178,2,0,47
+	.dw	_140-_144
+_144:
+_138:
+	.db	18,50,46,40
+	.dw	_139-_145
+_145:
+	.db	146,179,2,0,47
+	.dw	_140-_146
+_146:
+_139:
+	.db	146,180,2,0
+_140:
+	.db	22,19,62,36,33
+	.dl	0,0
+	; End of section
+
+	.debug		.debug_loc, cluster 'Segment_4'
+_147:
+	.dl	-1,_148,0,_258-_148
+	.dw	58
+	.db	127,0,18,10
+	.dw	16383
+	.db	26,22,62,37,18,48,46,40
+	.dw	_149-_153
+_153:
+	.db	146,177,2,0,47
+	.dw	_152-_154
+_154:
+_149:
+	.db	18,49,46,40
+	.dw	_150-_155
+_155:
+	.db	146,178,2,0,47
+	.dw	_152-_156
+_156:
+_150:
+	.db	18,50,46,40
+	.dw	_151-_157
+_157:
+	.db	146,179,2,0,47
+	.dw	_152-_158
+_158:
+_151:
+	.db	146,180,2,0
+_152:
+	.db	22,19,62,36,33
+	.dl	0,0
+	; End of section
+
+	.debug		.debug_loc, cluster 'Segment_5'
+_159:
+	.dl	-1,_160,0,_263-_160
+	.dw	58
+	.db	127,0,18,10
+	.dw	16383
+	.db	26,22,62,37,18,48,46,40
+	.dw	_161-_165
+_165:
+	.db	146,177,2,0,47
+	.dw	_164-_166
+_166:
+_161:
+	.db	18,49,46,40
+	.dw	_162-_167
+_167:
+	.db	146,178,2,0,47
+	.dw	_164-_168
+_168:
+_162:
+	.db	18,50,46,40
+	.dw	_163-_169
+_169:
+	.db	146,179,2,0,47
+	.dw	_164-_170
+_170:
+_163:
+	.db	146,180,2,0
+_164:
+	.db	22,19,62,36,33
+	.dl	0,0
+	; End of section
+
+	.debug		.debug_loc, cluster 'lightDigit1'
+_75:
+	.dl	-1,_76,0,_228-_76
+	.dw	58
+	.db	127,0,18,10
+	.dw	16383
+	.db	26,22,62,37,18,48,46,40
+	.dw	_77-_81
+_81:
+	.db	146,177,2,0,47
+	.dw	_80-_82
+_82:
+_77:
+	.db	18,49,46,40
+	.dw	_78-_83
+_83:
+	.db	146,178,2,0,47
+	.dw	_80-_84
+_84:
+_78:
+	.db	18,50,46,40
+	.dw	_79-_85
+_85:
+	.db	146,179,2,0,47
+	.dw	_80-_86
+_86:
+_79:
+	.db	146,180,2,0
+_80:
+	.db	22,19,62,36,33
+	.dl	0,0
+_280:
+	.dl	-1,_76,0,_228-_76
+	.dw	4
+	.db	82,157,8,0
+	.dl	_289-_76,_228-_76
+	.dw	1
+	.db	91
+	.dl	0,0
+	; End of section
+
+	.debug		.debug_loc, cluster 'lightDigit2'
+_87:
+	.dl	-1,_88,0,_233-_88
+	.dw	58
+	.db	127,0,18,10
+	.dw	16383
+	.db	26,22,62,37,18,48,46,40
+	.dw	_89-_93
+_93:
+	.db	146,177,2,0,47
+	.dw	_92-_94
+_94:
+_89:
+	.db	18,49,46,40
+	.dw	_90-_95
+_95:
+	.db	146,178,2,0,47
+	.dw	_92-_96
+_96:
+_90:
+	.db	18,50,46,40
+	.dw	_91-_97
+_97:
+	.db	146,179,2,0,47
+	.dw	_92-_98
+_98:
+_91:
+	.db	146,180,2,0
+_92:
+	.db	22,19,62,36,33
+	.dl	0,0
+_281:
+	.dl	-1,_88,0,_233-_88
+	.dw	4
+	.db	82,157,8,0
+	.dl	_290-_88,_233-_88
+	.dw	1
+	.db	91
+	.dl	0,0
+	; End of section
+
+	.debug		.debug_loc, cluster 'main'
+_283:
+	.dl	-1,_184,_291-_184,_5-_184
+	.dw	1
+	.db	92
+	.dl	0,0
+_285:
+	.dl	-1,_184,_292-_184,_7-_184
+	.dw	1
+	.db	93
+	.dl	0,0
+_183:
+	.dl	-1,_184,0,_273-_184
+	.dw	58
+	.db	127,0,18,10
+	.dw	16383
+	.db	26,22,62,37,18,48,46,40
+	.dw	_185-_189
+_189:
+	.db	146,177,2,0,47
+	.dw	_188-_190
+_190:
+_185:
+	.db	18,49,46,40
+	.dw	_186-_191
+_191:
+	.db	146,178,2,0,47
+	.dw	_188-_192
+_192:
+_186:
+	.db	18,50,46,40
+	.dw	_187-_193
+_193:
+	.db	146,179,2,0,47
+	.dw	_188-_194
+_194:
+_187:
+	.db	146,180,2,0
+_188:
+	.db	22,19,62,36,33
+	.dl	0,0
+	; End of section
+
+	.debug		.debug_loc, cluster 'port_init'
+_63:
+	.dl	-1,_64,0,_223-_64
+	.dw	58
+	.db	127,0,18,10
+	.dw	16383
+	.db	26,22,62,37,18,48,46,40
+	.dw	_65-_69
+_69:
+	.db	146,177,2,0,47
+	.dw	_68-_70
+_70:
+_65:
+	.db	18,49,46,40
+	.dw	_66-_71
+_71:
+	.db	146,178,2,0,47
+	.dw	_68-_72
+_72:
+_66:
+	.db	18,50,46,40
+	.dw	_67-_73
+_73:
+	.db	146,179,2,0,47
+	.dw	_68-_74
+_74:
+_67:
+	.db	146,180,2,0
+_68:
+	.db	22,19,62,36,33
+	.dl	0,0
+	; End of section
+
+	.debug		.debug_loc, cluster 'timer2_init'
+_171:
+	.dl	-1,_172,0,_268-_172
+	.dw	58
+	.db	127,0,18,10
+	.dw	16383
+	.db	26,22,62,37,18,48,46,40
+	.dw	_173-_177
+_177:
+	.db	146,177,2,0,47
+	.dw	_176-_178
+_178:
+_173:
+	.db	18,49,46,40
+	.dw	_174-_179
+_179:
+	.db	146,178,2,0,47
+	.dw	_176-_180
+_180:
+_174:
+	.db	18,50,46,40
+	.dw	_175-_181
+_181:
+	.db	146,179,2,0,47
+	.dw	_176-_182
+_182:
+_175:
+	.db	146,180,2,0
+_176:
+	.db	22,19,62,36,33
+	.dl	0,0
+	; End of section
+
+	.debug		.debug_frame
+_428:
+	.dl	184
+	.dl	-1
+	.db	3,0,2,2,173,2,15,60,127,0,18,10
+	.dw	16383
+	.db	26,22,62,37,18,48,46,40
+	.dw	_429-_433
+_433:
+	.db	146,177,2,0,47
+	.dw	_432-_434
+_434:
+_429:
+	.db	18,49,46,40
+	.dw	_430-_435
+_435:
+	.db	146,178,2,0,47
+	.dw	_432-_436
+_436:
+_430:
+	.db	18,50,46,40
+	.dw	_431-_437
+_437:
+	.db	146,179,2,0,47
+	.dw	_432-_438
+_438:
+_431:
+	.db	146,180,2,0
+_432:
+	.db	22,19,62,36,33,48,34,16,173,2,12,19,146,176,2,0,64,36,146,161,2,0,33,8,15,22,161,2,5,19,146,161,2,4,8
+	.db	162,2,8,166,2,8,177,2,8,178,2,8,179,2,8,180,2,8,0,8,1,8,6,8,7,8,8,8,9,8,10,8,167,2,8,168,2,8,169,2,8,170
+	.db	2,8,171,2,8,172,2,16,174,2,12,19,146,176,2,0,64,36,146,161,2,0,33,16,175,2,12,19,146,176,2,0,64,36,146
+	.db	161,2,2,33,8,176,2
+	; End of section
+
+	.debug		.debug_frame, cluster 'MAIN_vInit'
+	.dl	32
+	.dl	_428,_16,_218-_16
+	.db	8,160,2,8,2,8,3,8,4,8,5,8,12,8,13,8,14,0,0,0
+	; End of section
+
+	.debug		.debug_frame, cluster 'MAIN_vUnlockProtecReg'
+	.dl	32
+	.dl	_428,_28,_203-_28
+	.db	8,160,2,8,2,8,3,8,4,8,5,8,12,8,13,8,14,0,0,0
+	; End of section
+
+	.debug		.debug_frame, cluster 'MAIN_vLockProtecReg'
+	.dl	32
+	.dl	_428,_40,_208-_40
+	.db	8,160,2,8,2,8,3,8,4,8,5,8,12,8,13,8,14,0,0,0
+	; End of section
+
+	.debug		.debug_frame, cluster 'MAIN_vChangeFreq'
+	.dl	32
+	.dl	_428,_52,_213-_52
+	.db	8,160,2,8,2,8,3,8,4,8,5,8,12,8,13,8,14,0,0,0
+	; End of section
+
+	.debug		.debug_frame, cluster 'port_init'
+	.dl	32
+	.dl	_428,_64,_223-_64
+	.db	8,160,2,8,2,8,3,8,4,8,5,8,12,8,13,8,14,0,0,0
+	; End of section
+
+	.debug		.debug_frame, cluster 'lightDigit1'
+	.dl	28
+	.dl	_428,_76,_228-_76
+	.db	8,160,2,8,3,8,4,8,5,8,12,8,13,8,14,0
+	; End of section
+
+	.debug		.debug_frame, cluster 'lightDigit2'
+	.dl	28
+	.dl	_428,_88,_233-_88
+	.db	8,160,2,8,3,8,4,8,5,8,12,8,13,8,14,0
+	; End of section
+
+	.debug		.debug_frame, cluster 'Segment_0'
+	.dl	32
+	.dl	_428,_100,_238-_100
+	.db	8,160,2,8,2,8,3,8,4,8,5,8,11,8,12,8,13,8,14,0
+	; End of section
+
+	.debug		.debug_frame, cluster 'Segment_1'
+	.dl	32
+	.dl	_428,_112,_243-_112
+	.db	8,160,2,8,2,8,3,8,4,8,5,8,11,8,12,8,13,8,14,0
+	; End of section
+
+	.debug		.debug_frame, cluster 'Segment_2'
+	.dl	32
+	.dl	_428,_124,_248-_124
+	.db	8,160,2,8,2,8,3,8,4,8,5,8,11,8,12,8,13,8,14,0
+	; End of section
+
+	.debug		.debug_frame, cluster 'Segment_3'
+	.dl	32
+	.dl	_428,_136,_253-_136
+	.db	8,160,2,8,2,8,3,8,4,8,5,8,11,8,12,8,13,8,14,0
+	; End of section
+
+	.debug		.debug_frame, cluster 'Segment_4'
+	.dl	32
+	.dl	_428,_148,_258-_148
+	.db	8,160,2,8,2,8,3,8,4,8,5,8,11,8,12,8,13,8,14,0
+	; End of section
+
+	.debug		.debug_frame, cluster 'Segment_5'
+	.dl	32
+	.dl	_428,_160,_263-_160
+	.db	8,160,2,8,2,8,3,8,4,8,5,8,11,8,12,8,13,8,14,0
+	; End of section
+
+	.debug		.debug_frame, cluster 'timer2_init'
+	.dl	32
+	.dl	_428,_172,_268-_172
+	.db	8,160,2,8,2,8,3,8,4,8,5,8,11,8,12,8,13,8,14,0
+	; End of section
+
+	.debug		.debug_frame
+_439:
+	.dl	148
+	.dl	-1
+	.db	3,0,2,2,173,2,15,60,127,0,18,10
+	.dw	16383
+	.db	26,22,62,37,18,48,46,40
+	.dw	_440-_444
+_444:
+	.db	146,177,2,0,47
+	.dw	_443-_445
+_445:
+_440:
+	.db	18,49,46,40
+	.dw	_441-_446
+_446:
+	.db	146,178,2,0,47
+	.dw	_443-_447
+_447:
+_441:
+	.db	18,50,46,40
+	.dw	_442-_448
+_448:
+	.db	146,179,2,0,47
+	.dw	_443-_449
+_449:
+_442:
+	.db	146,180,2,0
+_443:
+	.db	22,19,62,36,33,48,34,16,173,2,12,19,146,176,2,0,64,36,146,161,2,0,33,8,15,22,161,2,5,19,146,161,2,4,8
+	.db	177,2,8,178,2,8,179,2,8,180,2,16,174,2,12,19,146,176,2,0,64,36,146,161,2,0,33,16,175,2,12,19,146,176,2
+	.db	0,64,36,146,161,2,2,33,8,176,2,0,0
+	; End of section
+
+	.debug		.debug_frame, cluster 'main'
+	.dl	64
+	.dl	_439,_184,_273-_184
+	.db	8,162,2,8,166,2,8,160,2,8,0,8,1,8,3,8,4,8,5,8,6,8,7,8,8,8,9,8,10,8,14,8,167,2,8,168,2,8,169,2,8,170,2
+	.db	8,171,2,8,172,2,0,0,0
+	; End of section
+
+
+; ..\MAIN.c	   514  
+; ..\MAIN.c	   515  
+; ..\MAIN.c	   516  
+; ..\MAIN.c	   517  // USER CODE BEGIN (MAIN_General,10)
+; ..\MAIN.c	   518  
+; ..\MAIN.c	   519  
+; ..\MAIN.c	   520  
+; ..\MAIN.c	   521  // USER CODE END
+; ..\MAIN.c	   522  
+; ..\MAIN.c	   523  
+
+	; Module end
+	.end

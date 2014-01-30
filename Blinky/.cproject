@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+	<storageModule moduleId="org.eclipse.cdt.core.settings">
+		<cconfiguration id="com.tasking.config.c166.abs.debug.1560306127">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.tasking.config.c166.abs.debug.1560306127" moduleId="org.eclipse.cdt.core.settings" name="Debug">
+				<externalSettings/>
+				<extensions>
+					<extension id="com.tasking.managedbuilder.TASKING_ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="com.tasking.managedbuilder.TskRegexErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="elf" artifactName="Blinky" buildArtefactType="com.tasking.c166.buildArtefactType.elf" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=com.tasking.c166.buildArtefactType.elf" cleanCommand="&quot;${PRODDIR}/bin/rm&quot; -rf" description="" id="com.tasking.config.c166.abs.debug.1560306127" name="Debug" parent="com.tasking.config.c166.abs.debug">
+					<folderInfo id="com.tasking.config.c166.abs.debug.1560306127." name="/" resourcePath="">
+						<toolChain id="com.tasking.c166.abs.debug.412823270" name="TASKING VX-toolset for C166" superClass="com.tasking.c166.abs.debug">
+							<option id="com.tasking.c166.pluginVersion.1956710105" name="Plugin version" superClass="com.tasking.c166.pluginVersion" value="1.91.1.1" valueType="string"/>
+							<option id="com.tasking.c166.prodDir.557569103" name="Product directory:" superClass="com.tasking.c166.prodDir" value="${eclipse_home}/.." valueType="string"/>
+							<option id="com.tasking.c166.cpu.535994817" name="Processor:" superClass="com.tasking.c166.cpu" value="xc2210u_8f" valueType="string"/>
+							<targetPlatform archList="all" binaryParser="com.tasking.managedbuilder.TASKING_ELF" id="com.tasking.c166.platform.abs.debug.45587366" name="Debug" osList="" superClass="com.tasking.c166.platform.abs.debug"/>
+							<builder buildPath="${workspace_loc:/Blinky/Debug}" id="com.tasking.c166.builder.abs.debug.351604804" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="TASKING C166 Makefile generator" parallelBuildOn="true" parallelizationNumber="-1" superClass="com.tasking.c166.builder.abs.debug"/>
+							<tool id="com.tasking.c166.cc.abs.debug.458521368" name="C/C++ Compiler" superClass="com.tasking.c166.cc.abs.debug">
+								<option id="com.tasking.c166.cc.pr36858.42076544" name="workaround for PR36858" superClass="com.tasking.c166.cc.pr36858" value="true" valueType="string"/>
+								<option id="com.tasking.c166.cc.noTaskingSfr.602473869" name="Automatic inclusion of '.sfr' file" superClass="com.tasking.c166.cc.noTaskingSfr" value="false" valueType="boolean"/>
+								<inputType id="com.tasking.c166.cppInputType.2109829651" name="C++" superClass="com.tasking.c166.cppInputType"/>
+								<inputType id="com.tasking.c166.cpp.cInputType.96475088" name="C" superClass="com.tasking.c166.cpp.cInputType"/>
+								<inputType id="com.tasking.c166.cc.msInputType.1208225188" name="MS" superClass="com.tasking.c166.cc.msInputType"/>
+							</tool>
+							<tool id="com.tasking.c166.as.abs.debug.704567156" name="Assembler" superClass="com.tasking.c166.as.abs.debug">
+								<inputType id="com.tasking.c166.asmInputType.1141415379" name="ASM" superClass="com.tasking.c166.asmInputType"/>
+							</tool>
+							<tool id="com.tasking.c166.lk.abs.debug.1811764567" name="Linker" superClass="com.tasking.c166.lk.abs.debug">
+								<inputType id="com.tasking.c166.lkObjInputType.550563243" name="OBJ" superClass="com.tasking.c166.lkObjInputType"/>
+								<inputType id="com.tasking.c166.lkLibInputType.893253126" name="LIB" superClass="com.tasking.c166.lkLibInputType"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+			<storageModule moduleId="com.tasking.toolInfo">
+				<toolInfo>TASKING VX-toolset for C166: Eclipse plugin v1.41.0.0</toolInfo>
+				<toolInfo>TASKING VX-toolset for C166: control program v3.1r1 Build 132</toolInfo>
+				<toolInfo>TASKING VX-toolset for C166: Assembler v3.1r1 Build 314</toolInfo>
+				<toolInfo>TASKING program builder v3.1r1 Build 071</toolInfo>
+				<toolInfo>TASKING VX-toolset Lite for C166: C compiler v3.1r1 Build 718 SN 00000166</toolInfo>
+			</storageModule>
+			<storageModule moduleId="com.tasking.flash.settings"/>
+		</cconfiguration>
+		<cconfiguration id="com.tasking.config.c166.abs.release.1824907582">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.tasking.config.c166.abs.release.1824907582" moduleId="org.eclipse.cdt.core.settings" name="Release">
+				<externalSettings/>
+				<extensions>
+					<extension id="com.tasking.managedbuilder.TASKING_ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="com.tasking.managedbuilder.TskRegexErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="elf" artifactName="Blinky" buildArtefactType="com.tasking.c166.buildArtefactType.elf" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=com.tasking.c166.buildArtefactType.elf" cleanCommand="&quot;${PRODDIR}/bin/rm&quot; -rf" description="" id="com.tasking.config.c166.abs.release.1824907582" name="Release" parent="com.tasking.config.c166.abs.release">
+					<folderInfo id="com.tasking.config.c166.abs.release.1824907582." name="/" resourcePath="">
+						<toolChain id="com.tasking.c166.abs.release.552005474" name="TASKING VX-toolset for C166" superClass="com.tasking.c166.abs.release">
+							<option id="com.tasking.c166.pluginVersion.2107060023" name="Plugin version" superClass="com.tasking.c166.pluginVersion" value="1.91.1.1" valueType="string"/>
+							<option id="com.tasking.c166.prodDir.495749062" name="Product directory:" superClass="com.tasking.c166.prodDir" value="${eclipse_home}/.." valueType="string"/>
+							<option id="com.tasking.c166.cpu.45576878" name="Processor:" superClass="com.tasking.c166.cpu" value="xc2210u_8f" valueType="string"/>
+							<targetPlatform archList="all" binaryParser="com.tasking.managedbuilder.TASKING_ELF" id="com.tasking.c166.platform.abs.release.1559649432" name="Release" osList="" superClass="com.tasking.c166.platform.abs.release"/>
+							<builder buildPath="${workspace_loc:/Blinky/Release}" id="com.tasking.c166.builder.abs.debug.1186486341" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="TASKING C166 Makefile generator" parallelBuildOn="true" parallelizationNumber="-1" superClass="com.tasking.c166.builder.abs.debug"/>
+							<tool id="com.tasking.c166.cc.abs.release.1905376941" name="C/C++ Compiler" superClass="com.tasking.c166.cc.abs.release">
+								<option id="com.tasking.c166.cc.pr36858.990523841" name="workaround for PR36858" superClass="com.tasking.c166.cc.pr36858" value="true" valueType="string"/>
+								<option id="com.tasking.c166.cc.noTaskingSfr.1251359560" name="Automatic inclusion of '.sfr' file" superClass="com.tasking.c166.cc.noTaskingSfr" value="false" valueType="boolean"/>
+								<inputType id="com.tasking.c166.cppInputType.408187857" name="C++" superClass="com.tasking.c166.cppInputType"/>
+								<inputType id="com.tasking.c166.cpp.cInputType.1928596510" name="C" superClass="com.tasking.c166.cpp.cInputType"/>
+								<inputType id="com.tasking.c166.cc.msInputType.959002075" name="MS" superClass="com.tasking.c166.cc.msInputType"/>
+							</tool>
+							<tool id="com.tasking.c166.as.abs.release.1856272083" name="Assembler" superClass="com.tasking.c166.as.abs.release">
+								<inputType id="com.tasking.c166.asmInputType.12918281" name="ASM" superClass="com.tasking.c166.asmInputType"/>
+							</tool>
+							<tool id="com.tasking.c166.lk.abs.release.2045621698" name="Linker" superClass="com.tasking.c166.lk.abs.release">
+								<inputType id="com.tasking.c166.lkObjInputType.621145825" name="OBJ" superClass="com.tasking.c166.lkObjInputType"/>
+								<inputType id="com.tasking.c166.lkLibInputType.735042955" name="LIB" superClass="com.tasking.c166.lkLibInputType"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+	</storageModule>
+	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+		<project id="Blinky.com.tasking.c166.target.abs.983607982" name="TASKING C166 Application" projectType="com.tasking.c166.target.abs"/>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="com.tasking.config.c166.abs.debug.1560306127;com.tasking.config.c166.abs.debug.1560306127.">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.tasking.c166.TskC166ScannerInfo"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.tasking.config.c166.abs.release.1824907582;com.tasking.config.c166.abs.release.1824907582.">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.tasking.c166.TskC166ScannerInfo"/>
+		</scannerConfigBuildInfo>
+	</storageModule>
+	<storageModule moduleId="refreshScope" versionNumber="1">
+		<resource resourceType="PROJECT" workspacePath="/Blinky"/>
+	</storageModule>
+</cproject>
