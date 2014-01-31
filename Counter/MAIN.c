@@ -240,26 +240,13 @@ void port_init ()
 	P10_IOCR05	= 0x0080;
 	P10_IOCR06	= 0x0080;
 	P10_OUT     = 0x007F; // P10_IOCR00 - P10_IOCR06 HIGH
-
 	// Anodes
 	P3_IOCR03 = 0x0080; // digit 2
 	P3_IOCR04 = 0x0080; // digit 1
 
-	// Switch (Not implemented yet)
-
-	// Cathode
-	P3_IOCR01 = 0x0080;
-
-	// Anode
-	P3_IOCR00 = 0x0080;
-
-	// Input
-	P3_IOCR02 = 0x0010;
-
 	//P3_OUT = 0x001B; //0000 0000 0001 1011
 	P3_OUT = 0x000B; // 0000 0000 0000 1011 digit 2
 	//P3_OUT = 0x0013; digit 1
-	P3_IN = 0x0002;
 }
 
 void lightDigit1(unsigned char number) {
