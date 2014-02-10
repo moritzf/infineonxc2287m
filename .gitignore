@@ -8,11 +8,13 @@
 *.log
 **/Debug/*
 !**/Debug/*.hex
+/Blinky
 /Wuerfel_Moritz
-/Manual
 .metadata
 .settings
 *.cproject
 *.project
 *.launch
 *.lsl
+*.pdf
+
