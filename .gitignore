@@ -1,3 +1,4 @@
+# C Files
 *.o
 *.ko
 *.obj
@@ -6,12 +7,16 @@
 *.a
 *.dat
 *.log
+
+# Folders
 **/Debug/*
 !**/Debug/*.hex
 /Blinky
 /Wuerfel_Moritz
 .metadata
 .settings
+
+# Unused Files
 *.cproject
 *.project
 *.launch
